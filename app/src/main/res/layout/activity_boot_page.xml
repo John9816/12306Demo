@@ -7,10 +7,10 @@
     tools:context=".BootPageActivity"
     android:background="@drawable/splash">
 
-   <Button
+   <TextView
+       android:id="@+id/tv_rec"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:text="跳过"
        android:layout_alignParentRight="true"
        />
 
