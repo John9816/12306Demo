@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+//引导页面
 public class BootPageActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int reclen = 5;//倒计时
@@ -20,7 +20,6 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
     private final static int COUNT = 1;
     Timer timer = new Timer();//定时器
     private Handler handler;
-    private Runnable runnable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +61,6 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
             }
         },1000,2000);
     }
-
 
     //点击跳过
     @Override
