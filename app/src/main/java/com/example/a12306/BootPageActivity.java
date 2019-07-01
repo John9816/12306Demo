@@ -60,7 +60,7 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 handler.sendEmptyMessage(COUNT);
             }
-        },0,1000);
+        },1000,2000);
     }
 
 
