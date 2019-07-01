@@ -13,4 +13,5 @@
        android:text="跳过"
        android:layout_alignParentRight="true"
        />
+
 </RelativeLayout>
