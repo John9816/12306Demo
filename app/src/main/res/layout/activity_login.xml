@@ -73,6 +73,7 @@
         android:layout_alignBottom="@+id/ckLogin"
         android:layout_alignRight="@+id/btnLogin"
         android:text="忘记密码？"
-        android:textColor="#00BCD4"/>
+        android:textColor="#00BCD4"
+        />
 
 </RelativeLayout>
