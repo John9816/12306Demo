@@ -36,7 +36,7 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                 super.handleMessage(msg);
                 switch (msg.what){
                     case COUNT:
-                        tv_rec.setText(String.valueOf(reclen)+"s后跳转");
+                        tv_rec.setText(String.valueOf(reclen)+"s");
                         reclen--;
                         if(reclen == 0){
                             Intent intent = new Intent(BootPageActivity.this,LoginActivity.class);

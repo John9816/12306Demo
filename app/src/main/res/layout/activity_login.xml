@@ -1,14 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    android:padding="50sp"
+    tools:context=".LoginActivity" >
 
-    <TextView
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="登陆"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/user_male4_50" />
+
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="42dp"
+        android:drawableLeft="@drawable/administrator_25"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="请输入用户名"
+        android:singleLine="true" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edtUsername"
+        android:layout_below="@+id/edtUsername"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/lock_25"
+        android:drawablePadding="10dp"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:background="#00BCD4"
+        android:text="登陆"
+        android:textColor="#fff"
+        android:textSize="25sp" />
+
+    <CheckBox
+        android:id="@+id/ckLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnLogin"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginTop="38dp"
+        android:checked="true"
+        android:text="自动登录" />
+
+    <TextView
+        android:id="@+id/tvLostPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ckLogin"
+        android:layout_alignBottom="@+id/ckLogin"
+        android:layout_alignRight="@+id/btnLogin"
+        android:text="忘记密码？"
+        android:textColor="#00BCD4"/>
 
 </RelativeLayout>
