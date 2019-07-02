@@ -1,14 +1,18 @@
 package com.example.a12306;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.example.a12306.my.MyFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,7 +54,6 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        //跳过
         tv_rec = (TextView)findViewById(R.id.tv_rec);
         //跳过监听
         tv_rec.setOnClickListener(this);
@@ -60,7 +63,10 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                 handler.sendEmptyMessage(COUNT);
             }
         },1000,1000);
+
     }
+
+
 
     //点击跳过
     @Override

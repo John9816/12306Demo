@@ -25,7 +25,7 @@
         android:drawablePadding="10dp"
         android:ems="10"
         android:hint="请输入用户名"
-        android:inputType="number" >
+        android:singleLine="true">
 
         <requestFocus />
     </EditText>
