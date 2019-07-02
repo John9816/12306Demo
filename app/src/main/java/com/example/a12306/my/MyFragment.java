@@ -1,11 +1,13 @@
 package com.example.a12306.my;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.example.a12306.LoginActivity;
 import com.example.a12306.R;
@@ -25,11 +29,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static android.content.Context.MODE_PRIVATE;
+
 //用户管理界面
 public class MyFragment extends Fragment {
     private View view;
+    private EditText modifypw;
     private ListView listView;
     private Button btn_esc;
+    private AlertDialog alertDialog;
+    private AlertDialog.Builder builder;
     private String[] datas ={ "我的联系人", "我的账户", "我的密码" };
     private int Images[] = {R.drawable.mycontact,R.drawable.mycontact,R.drawable.mycontact};
 
@@ -47,7 +57,7 @@ public class MyFragment extends Fragment {
         btn_esc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sp = getActivity().getSharedPreferences("info", Context.MODE_PRIVATE);
+                SharedPreferences sp = getActivity().getSharedPreferences("info", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit(); editor.clear();
                 editor.commit();
                 getActivity().finish();
@@ -81,11 +91,38 @@ public class MyFragment extends Fragment {
                         startActivity(intent1);
                         break;
                     case 2:
-                        Intent intent2 = new Intent(getActivity(),MyPassword.class);
-                        startActivity(intent2);
+                        builder=new AlertDialog.Builder(getActivity());
+                        view= LayoutInflater.from(getActivity()).inflate(R.layout.activity_password_dialog,null,false);
+                        modifypw=view.findViewById(R.id.password);
+                        builder.setTitle("请输入你的密码");
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                alertDialog.dismiss();
+                            }
+                        });
+                        builder.setView(view);
+                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SharedPreferences sp=getActivity().getSharedPreferences("info",MODE_PRIVATE);
+                                String inputpasswors = modifypw.getText().toString().trim();
+                                String matepasswor=sp.getString("password","");
+                                if (inputpasswors.equals(matepasswor)){
+                                    alertDialog.dismiss();
+                                    Intent intent2 = new Intent(getActivity(),MyPassword.class);
+                                    startActivity(intent2);
+                                }else {
+                                    Toast.makeText(getActivity(),"密码错误", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
+                        alertDialog=builder.create();
+                        alertDialog.show();
                         break;
-                        default:
-                            break;
+                    default:
+                        break;
+
                 }
             }
         });
