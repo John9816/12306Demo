@@ -59,7 +59,7 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 handler.sendEmptyMessage(COUNT);
             }
-        },1000,2000);
+        },1000,1000);
     }
 
     //点击跳过

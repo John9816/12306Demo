@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 //用户管理界面
 public class MyFragment extends AppCompatActivity {
     private ListView listView;
@@ -32,6 +31,7 @@ public class MyFragment extends AppCompatActivity {
         setContentView(R.layout.activity_my_fragment);
         initView();//初始化
         }
+
     private void initView() {
         btn_esc = (Button)findViewById(R.id.btn_esc);
         btn_esc.setOnClickListener(new View.OnClickListener() {
@@ -59,10 +59,16 @@ public class MyFragment extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
+                        Intent intent = new Intent(MyFragment.this,MyContact.class);
+                        startActivity(intent);
                         break;
                     case 1:
+                        Intent intent1 = new Intent(MyFragment.this,MyAccount.class);
+                        startActivity(intent1);
                         break;
                     case 2:
+                        Intent intent2 = new Intent(MyFragment.this,MyPassword.class);
+                        startActivity(intent2);
                         break;
                         default:
                             break;

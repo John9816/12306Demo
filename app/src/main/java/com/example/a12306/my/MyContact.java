@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.a12306.R;
-
+//我的联系人
 public class MyContact extends AppCompatActivity {
 
     @Override

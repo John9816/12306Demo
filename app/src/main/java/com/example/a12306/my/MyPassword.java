@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.a12306.R;
-
+//我的密码
 public class MyPassword extends AppCompatActivity {
 
     @Override
