@@ -26,6 +26,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView tvLostPassword;
     private String username,password;
     private static final String TAG = "LoginActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,19 +35,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initView();
         readAccount();
     }
-    //读取本地用户和密码
+//读取本地用户和密码
     private void readAccount() {
         //创建SharedPreferences对象
         SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
         //获得保存在SharedPredPreferences中的用户名和密码
         String username = sp.getString("username", "");
         String password = sp.getString("password", "");
-        if(username.equals("dong") && password.equals("dong")){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        Log.d(TAG, "readAccount: "+username);
+        //在用户名和密码的输入框中显示用户名和密码
+        edtUsername.setText(username);
+        edtPassword.setText(password);
     }
+
     private void initView() {
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
@@ -65,12 +67,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogin:
                 username = edtUsername.getText().toString().trim();
                 password = edtPassword.getText().toString().trim();
-                if(username.equals("dong") && password.equals("dong")){
-                    //勾选自动登陆
+                //创建sharedPreference对象，info表示文件名，MODE_PRIVATE表示访问权限为私有的
+                SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
+                String passwords = sp.getString("password", "");
+                if(username.equals("123") && password.equals(passwords)){
+                    //勾选记住密码
                     if(ckLogin.isChecked())
                     {
-                        //创建sharedPreference对象，info表示文件名，MODE_PRIVATE表示访问权限为私有的
-                        SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
                         //获得sp的编辑器
                         SharedPreferences.Editor ed = sp.edit();
                         //以键值对的显示将用户名和密码保存到sp中
@@ -79,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         //提交用户名和密码
                         ed.commit();
                     }
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MyFragment.class);
                     startActivity(intent);
                     finish();
                 }else {

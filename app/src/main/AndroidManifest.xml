@@ -14,6 +14,7 @@
         <activity android:name=".my.MyPassword" />
         <activity android:name=".my.MyAccount" />
         <activity android:name=".my.MyContact" />
+        <activity android:name=".my.MyFragment"/>
         <activity android:name=".BootPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
