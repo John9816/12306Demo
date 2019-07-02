@@ -1,23 +1,18 @@
 package com.example.a12306.my;
 
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -43,7 +38,6 @@ public class MyFragment extends Fragment {
     private String[] datas ={ "我的联系人", "我的账户", "我的密码" };
     private int Images[] = {R.drawable.mycontact,R.drawable.mycontact,R.drawable.mycontact};
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,7 +57,6 @@ public class MyFragment extends Fragment {
                 getActivity().finish();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
-
             }
         });
         List<Map<String, Object>> listitem = new ArrayList<Map<String, Object>>();
