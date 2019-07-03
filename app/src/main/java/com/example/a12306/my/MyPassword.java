@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a12306.LoginActivity;
 import com.example.a12306.R;
 //我的密码
 public class MyPassword extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class MyPassword extends AppCompatActivity {
                     SharedPreferences.Editor ed = sp.edit();
                     ed.putString("password", password);
                     ed.commit();
-                    Intent intent = new Intent(MyPassword.this, MyFragment.class);
+                    Intent intent = new Intent(MyPassword.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }else {
