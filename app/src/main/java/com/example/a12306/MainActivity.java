@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         initView();
         rb_ticket.setChecked(true);
 
-
-
     }
 
     private void initView() {
@@ -36,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         rb_my = (RadioButton)findViewById(R.id.rb_my);
         rg = (RadioGroup)findViewById(R.id.rg_tab_bar);
         rg.setOnCheckedChangeListener(this);
-
         viewPager = (ViewPager)findViewById(R.id.vpager);
         viewPager.setAdapter(mAdapter);
         viewPager.setCurrentItem(0);

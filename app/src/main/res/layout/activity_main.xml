@@ -4,29 +4,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/ly_top_bar"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        >
-
-        <TextView
-            android:id="@+id/txt_topbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="提醒"
-            android:textSize="18sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_alignParentBottom="true" />
-
-    </RelativeLayout>
-
-
+        android:layout_height="2dp"
+        android:layout_below="@+id/vpager"
+        android:background="#020000"/>
 
         <RadioGroup
         android:id="@+id/rg_tab_bar"
@@ -42,6 +24,10 @@
                 android:layout_width="wrap_content"
                 style="@style/tab_menu_item"
                 android:layout_weight="1" />
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#020000" />
 
             <RadioButton
                 android:id="@+id/rb_order"
@@ -50,6 +36,11 @@
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#020000" />
 
             <RadioButton
                 android:id="@+id/rb_my"
@@ -74,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/div_tab_bar"
-            android:layout_below="@id/ly_top_bar" />
+
+            />
 
     </RelativeLayout>

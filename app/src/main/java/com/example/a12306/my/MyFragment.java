@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.a12306.LoginActivity;
 import com.example.a12306.R;
+import com.example.a12306.others.CONST;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class MyFragment extends Fragment {
     private Button btn_esc;
     private AlertDialog alertDialog;
     private AlertDialog.Builder builder;
-    private String[] datas ={ "我的联系人", "我的账户", "我的密码" };
+
     private int Images[] = {R.drawable.mycontact,R.drawable.mycontact,R.drawable.mycontact};
 
     @Override
@@ -62,7 +63,7 @@ public class MyFragment extends Fragment {
         List<Map<String, Object>> listitem = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < Images.length; i++) {
             Map<String,Object> hashMap = new HashMap<String, Object>();
-            hashMap.put("data",datas[i]);
+            hashMap.put("data", CONST.mydatas[i]);
             hashMap.put("Images", Images[i]);
             listitem.add(hashMap);
             SimpleAdapter adapter = new SimpleAdapter(getActivity(),listitem,R.layout.activity_my_fragment_items,
@@ -76,17 +77,20 @@ public class MyFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
+                        //我的联系人
                         Intent intent = new Intent(getActivity(),MyContact.class);
                         startActivity(intent);
                         break;
                     case 1:
+                        //我的账户
                         Intent intent1 = new Intent(getActivity(),MyAccount.class);
                         startActivity(intent1);
                         break;
                     case 2:
+                        //我的密码
                         builder=new AlertDialog.Builder(getActivity());
                         view= LayoutInflater.from(getActivity()).inflate(R.layout.activity_password_dialog,null,false);
-                        modifypw=view.findViewById(R.id.password);
+                        modifypw=view.findViewById(R.id.et_common);
                         builder.setTitle("请输入你的密码");
                         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override

@@ -24,7 +24,15 @@
             android:layout_alignParentRight="true"
             android:gravity="center_vertical"
             android:textSize="20sp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="30dp"/>
+
+        <ImageView
+            android:id="@+id/iv_common"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"/>
     </RelativeLayout>
 
 
