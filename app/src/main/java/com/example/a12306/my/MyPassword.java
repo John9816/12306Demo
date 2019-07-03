@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.AlteredCharSequence;
 import android.text.Layout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +19,7 @@ import com.example.a12306.R;
 public class MyPassword extends AppCompatActivity {
     private EditText edtPassword, edtagainPassword;
     private Button btnSave;
-
+    private static final String TAG = "MyPassword";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class MyPassword extends AppCompatActivity {
                     SharedPreferences.Editor ed = sp.edit();
                     ed.putString("password", password);
                     ed.commit();
+                    Log.d(TAG, "onClick: "+password);
                     Intent intent = new Intent(MyPassword.this, LoginActivity.class);
                     startActivity(intent);
                     finish();

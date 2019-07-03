@@ -69,12 +69,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
                 String passwords = sp.getString("password", "");
 
-                if(username.equals("dong") && password.equals("password")){
+                if(username.equals("dong") && password.equals(passwords)){
                     //勾选自动登陆
                     if(ckLogin.isChecked())
                     {
-                        //创建sharedPreference对象，info表示文件名，MODE_PRIVATE表示访问权限为私有的
-                        sp = getSharedPreferences("info", MODE_PRIVATE);
                         //获得sp的编辑器
                         SharedPreferences.Editor ed = sp.edit();
                         //以键值对的显示将用户名和密码保存到sp中

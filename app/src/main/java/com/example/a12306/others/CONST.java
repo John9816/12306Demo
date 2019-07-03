@@ -9,4 +9,5 @@ public final class CONST {
     public static final String[] passenger = {"成人","学生"};
     public static final String[] mydatas ={ "我的联系人", "我的账户", "我的密码" };
     public static final int[]  images= {R.drawable.forward_25,R.drawable.forward_25};
+    public static final String[] cities = {"西安","成都","北京","武汉","天津"};
 }
