@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        >
-
+        <activity android:name=".ticket.AddPassenger"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".my.MyPassword" />
-        <activity android:name=".my.MyAccount"
+        <activity
+            android:name=".my.MyAccount"
             android:label="我的账户"
-            android:theme="@android:style/Theme.Holo.Light"/>
-        <activity android:name=".my.MyContact"/>
+            android:theme="@android:style/Theme.Holo.Light" />
+        <activity android:name=".my.MyContact" />
         <activity android:name=".BootPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
