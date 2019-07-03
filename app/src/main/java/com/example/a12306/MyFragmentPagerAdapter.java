@@ -40,4 +40,5 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return PAGE_COUNT;
     }
+    //页卡切换效果
 }
