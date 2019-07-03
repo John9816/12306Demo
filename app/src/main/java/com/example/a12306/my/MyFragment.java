@@ -53,7 +53,8 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 SharedPreferences sp = getActivity().getSharedPreferences("info", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit(); editor.clear();
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putBoolean("ISCHECKED",false);
                 editor.commit();
                 getActivity().finish();
                 Intent intent = new Intent(getActivity(), LoginActivity.class);

@@ -62,7 +62,6 @@
         android:layout_alignLeft="@+id/btnLogin"
         android:layout_below="@+id/btnLogin"
         android:layout_marginTop="38dp"
-        android:checked="true"
         android:text="自动登录" />
 
     <TextView

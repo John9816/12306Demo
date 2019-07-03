@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -43,7 +44,7 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                         tv_rec.setText(String.valueOf(reclen)+"s");
                         reclen--;
                         if(reclen == 0){
-                            Intent intent = new Intent(BootPageActivity.this,LoginActivity.class);
+                           Intent intent = new Intent(BootPageActivity.this,LoginActivity.class);
                             startActivity(intent);
                             timer.cancel();
                             finish();
@@ -75,8 +76,10 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.tv_rec:
                     Intent intent = new Intent(BootPageActivity.this,LoginActivity.class);
                     startActivity(intent);
+
                     finish();
                     timer.cancel();
             }
     }
+
 }

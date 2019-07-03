@@ -2,11 +2,8 @@ package com.example.a12306.my;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.AlteredCharSequence;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +37,8 @@ public class MyPassword extends AppCompatActivity {
                     SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
                     SharedPreferences.Editor ed = sp.edit();
                     ed.putString("password", password);
+                    ed.putBoolean("MODIFYPASSWORD",true);
+                    ed.putBoolean("ISCHECKED",false);
                     ed.commit();
                     Log.d(TAG, "onClick: "+password);
                     Intent intent = new Intent(MyPassword.this, LoginActivity.class);

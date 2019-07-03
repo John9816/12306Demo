@@ -1,5 +1,6 @@
 package com.example.a12306.ticket;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,11 +11,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.example.a12306.MainActivity;
 import com.example.a12306.R;
+
+import java.util.Calendar;
+
 //订票
 public class TicketFragment extends Fragment implements View.OnClickListener{
     private View view;
@@ -83,6 +90,21 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.tvTicketDateFrom:
 
+                Calendar cale1 = Calendar.getInstance();
+                new DatePickerDialog(getActivity(),new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                      /*  //这里获取到的月份需要加上1哦~
+                        result += "你选择的是"+year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日";
+                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();*/
+
+                      tvTicketDateFrom.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                    }
+                }
+                        ,cale1.get(Calendar.YEAR)
+                        ,cale1.get(Calendar.MONTH)
+                        ,cale1.get(Calendar.DAY_OF_MONTH)).show();
 
         }
 
