@@ -4,20 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".my.MyAccount"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="30sp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        >
-
+<!--
         <TextView
+            android:id="@+id/tv_myaccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的账户"
             android:textSize="25sp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
+            android:layout_centerHorizontal="true" />-->
+
+
+    <ListView
+        android:id="@+id/lv_myaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+    </ListView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存"
+        android:layout_below="@+id/lv_myaccount"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

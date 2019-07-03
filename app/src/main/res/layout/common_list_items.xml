@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_common"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_common_details"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:layout_marginRight="30dp"/>
+
+        <ImageView
+            android:id="@+id/iv_common"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

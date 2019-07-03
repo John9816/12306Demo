@@ -17,5 +17,10 @@
 
         <item name="android:textSize">18sp</item>
     </style>
+    //自定义对话框样式
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="android:background">#FFFFFF</item>
+
+    </style>
 
 </resources>
