@@ -6,8 +6,6 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,7 +63,7 @@ public class MyAccount extends Activity {
             listdata.add(hashMap);
         }
 
-       adapter = new SimpleAdapter(this,listdata,R.layout.common_list_items,new String[]{"titles","datas","images"},
+       adapter = new SimpleAdapter(this,listdata,R.layout.list_items,new String[]{"titles","datas","images"},
                new int[]{R.id.tv_common,R.id.tv_common_details,R.id.iv_common});
         listView.setAdapter(adapter);
 
