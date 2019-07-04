@@ -34,13 +34,8 @@ public class MyContact extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_contact);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
         initData();
-
-
         lvMyContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -53,8 +48,13 @@ public class MyContact extends Activity {
         });
     }
 
+
     //初始化数据
     private void initData() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         lvMyContact = findViewById(R.id.lv_mycontact);
         data = new ArrayList<>();
         map1 = new HashMap<>();
@@ -82,6 +82,7 @@ public class MyContact extends Activity {
                 new int[]{R.id.tvContactName, R.id.tvContactIdCard, R.id.tvContactTel});
 
         lvMyContact.setAdapter(adapter);
+        Log.d(TAG, "initData: "+"initData");
     }
 
     //ActionBar重写的方法
@@ -110,16 +111,37 @@ public class MyContact extends Activity {
             return super.onCreateOptionsMenu(menu);
         }
 
-        //从MyContactEdIT首】收到数据
+    @Override
+    protected void onStart() {
+
+       // getData();
+        super.onStart();
+    }
+
+    //从MyContactEdit收到数据
     public void getData(){
         Bundle bundle = getIntent().getExtras();
         String name = bundle.getString("name");
         String sex = bundle.getString("sex");
         String telephone = bundle.getString("telephone");
-        map1.put("name",name.split("\\(")[0]);
-        map1.put("name",name.split("\\(")[0]);
+        map1.put("name",name);
+        map1.put("name",name);
+        Log.d(TAG, "getData: "+"getData");
 
     }
 
-    }
+    //收到来自MyContactEdit传来的数据
+    /*@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode){
+            case RESULT_OK:
+                Bundle bundle = getIntent().getExtras();
+                String name = bundle.getString("name");
+                Log.d(TAG, "name: "+name);
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }*/
+}
 

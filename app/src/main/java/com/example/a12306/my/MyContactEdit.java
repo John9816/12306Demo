@@ -31,6 +31,7 @@ import static com.example.a12306.others.CONST.passenger;
 
 public class MyContactEdit extends Activity {
 
+    private int RESULT_OK = 1;
     private ListView lvMyContactEdit;
     private List<Map<String,Object>> data;
     private SimpleAdapter adapter;
@@ -153,6 +154,7 @@ public class MyContactEdit extends Activity {
         btn_contactsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //获取姓名
                 String name =  map1.get("key2").toString();
                 //获取性别
@@ -165,10 +167,13 @@ public class MyContactEdit extends Activity {
                 bundle.putString("name",name);
                 bundle.putString("sex",sex);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent,0);
+                //setResult(RESULT_OK,intent);
+                //startActivity(intent);
                 finish();
             }
         });
+
 
     }
 
@@ -230,5 +235,10 @@ public class MyContactEdit extends Activity {
         return true;
     }
 
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+
+        super.startActivityForResult(intent, requestCode);
+    }
 }
 
