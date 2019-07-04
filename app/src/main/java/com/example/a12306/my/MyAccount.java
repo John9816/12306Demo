@@ -4,12 +4,16 @@ package com.example.a12306.my;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -37,6 +41,7 @@ public class MyAccount extends Activity {
     private Map<String,Object> hashMap;
     private AlertDialog alertDialog;
     private int index = 0;//记录被选中的单选项
+    private Button btn_save;
     private static final String TAG = "MyAccount";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,19 @@ public class MyAccount extends Activity {
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        //保存
+        btn_save = (Button)findViewById(R.id.btn_save);
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*SharedPreferences sharedPreferences = getSharedPreferences("info",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("type",datas[4]);
+                editor.commit();*/
+                Toast.makeText(MyAccount.this,"保存成功",Toast.LENGTH_SHORT).show();
 
+            }
+        });
         listView = (ListView)findViewById(R.id.lv_myaccount);
         listdata = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
@@ -82,7 +99,6 @@ public class MyAccount extends Activity {
                                 if(index == 0){
                                     datas[4] =passenger[0];
                                     listdata.get(4).put("datas",passenger[0]);
-
                                 }if(index == 1){
                                     datas[4] = passenger[1];
                                     listdata.get(4).put("datas",passenger[1]);
@@ -149,4 +165,6 @@ public class MyAccount extends Activity {
             default:
         }
         return true;
-    } }
+    }
+
+}

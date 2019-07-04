@@ -9,17 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".my.MyContactEdit"></activity>
+        <activity android:name=".my.AddNewContact"
+            android:label="添加联系人"
+            android:theme="@android:style/Theme.Holo.Light"/>
+        <activity android:name=".my.MyContactEdit"
+            android:label="联系人编辑"
+            android:theme="@android:style/Theme.Holo.Light"/>
         <activity android:name=".ticket.CityActivity" />
         <activity android:name=".ticket.AddPassenger" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".my.MyPassword" />
+        <activity
+            android:name=".my.MyPassword"
+            android:label="密码修改"
+            android:theme="@android:style/Theme.Holo.Light" />
         <activity
             android:name=".my.MyAccount"
             android:label="我的账户"
             android:theme="@android:style/Theme.Holo.Light" />
-        <activity android:name=".my.MyContact" />
+        <activity
+            android:name=".my.MyContact"
+            android:label="我的联系人"
+            android:theme="@android:style/Theme.Holo.Light" />
         <activity android:name=".BootPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,7 @@
 package com.example.a12306.ticket;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -62,30 +64,7 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 startActivity(intent1);
                 break;
             case R.id.imgTicketExchange:
-                /*animation = AnimationUtils.loadAnimation(getActivity(),
-                        R.anim.anim_set);
-                tvTicketStationTo.startAnimation(animation);
-                tvTicketStationFrom.startAnimation(animation);*/
-                TranslateAnimation animation = new TranslateAnimation(0,150,0,0);
-                animation.setInterpolator(new LinearInterpolator());
-                animation.setDuration(500);
-                animation.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
 
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        tvTicketStationFrom.clearAnimation();
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-                tvTicketStationFrom.startAnimation(animation);
 
                 break;
             case R.id.tvTicketDateFrom:
@@ -109,4 +88,10 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
         }
 
     }
+
+
+
+
+
+
 }
