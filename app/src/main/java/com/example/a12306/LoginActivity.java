@@ -38,21 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //readAccount();
 
     }
-   /* //读取本地用户和密码
-    private void readAccount() {
-        //创建SharedPreferences对象
-        SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
-        //获得保存在SharedPredPreferences中的用户名和密码
-        String local_username = sp.getString("username", "");
-        //String local_password = sp.getString("password", "");
-        String local_newpassword = sp.getString("newpassword","");
-        edtUsername.setText(local_username);
-        if(edtPassword.equals(local_newpassword) && local_username.equals("dong")){
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        }*/
+
 
     private void initView() {
         edtUsername = (EditText)findViewById(R.id.edtUsername);

@@ -17,9 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
 import com.example.a12306.R;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,14 +29,14 @@ import static com.example.a12306.others.CONST.passenger;
 
 public class MyContactEdit extends Activity {
 
-    private int RESULT_OK = 1;
     private ListView lvMyContactEdit;
     private List<Map<String,Object>> data;
     private SimpleAdapter adapter;
-    private Button btn_contactsave;
-    private AlertDialog alertDialog;
+    private Button btn_contactsave;//保存按钮
+    private AlertDialog alertDialog;//对话框
     private AlertDialog.Builder builder;
-    private EditText modifynm;
+    private EditText modifynm;//修改后的名字
+    private int index = 0;//记录被选中的单选项
     private String inputname,inputtel;
     private  Map<String,Object> map1,map2,map3,map4,map5;
     private static final String TAG = "MyContactEdit";
@@ -92,10 +90,11 @@ public class MyContactEdit extends Activity {
                         //乘客类型
                         AlertDialog.Builder builder = new AlertDialog.Builder(MyContactEdit.this,R.style.AlertDialogCustom);
                         builder.setTitle("乘客类型");
-                        builder.setSingleChoiceItems(passenger, position, new DialogInterface.OnClickListener() {
+                        builder.setSingleChoiceItems(passenger, index, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //index = which;
+                                //默认选中第一个
+                                index = which;
                                 if (which == 0) {
                                     //如果选择0--成人
                                     Log.d(TAG, "position: "+position);
@@ -158,18 +157,22 @@ public class MyContactEdit extends Activity {
                 //获取姓名
                 String name =  map1.get("key2").toString();
                 //获取性别
-                String sex = map4.get("key2").toString();
+                String type = map4.get("key2").toString();
                 //获取电话号码
                 String telephone = map5.get("key2").toString();
+                String append = name+"("+type+")";
+                //存入本地
+                SharedPreferences sharedPreferences = getSharedPreferences("mycontact",MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("append",append);
+                editor.putString("tel",telephone);
+                editor.commit();
+
                 Intent intent = new Intent(MyContactEdit.this,MyContact.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("telephone",telephone);
-                bundle.putString("name",name);
-                bundle.putString("sex",sex);
-                intent.putExtras(bundle);
-                startActivityForResult(intent,0);
-                //setResult(RESULT_OK,intent);
-                //startActivity(intent);
+                intent.putExtra("telephone",telephone);
+                intent.putExtra("name",name);
+                intent.putExtra("type",type);
+                setResult(RESULT_OK,intent);
                 finish();
             }
         });
@@ -202,7 +205,7 @@ public class MyContactEdit extends Activity {
 
         map4 = new HashMap<>();
         map4.put("key1","乘客类型");
-        map4.put("key2",name.split("\\(")[1]);
+        map4.put("key2",name.split("\\(")[1].replace(")",""));
         map4.put("key3",R.drawable.forward_25);
         data.add(map4);
 
@@ -235,10 +238,5 @@ public class MyContactEdit extends Activity {
         return true;
     }
 
-    @Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-
-        super.startActivityForResult(intent, requestCode);
-    }
 }
 

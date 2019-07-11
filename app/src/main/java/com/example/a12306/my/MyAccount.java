@@ -4,11 +4,8 @@ package com.example.a12306.my;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,17 +15,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
-
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import static com.example.a12306.others.CONST.datas;
 import static com.example.a12306.others.CONST.passenger;
 import static com.example.a12306.others.CONST.titles;
