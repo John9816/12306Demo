@@ -25,6 +25,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="前一天"
+                android:textColor="#FAF7F7"
+                android:background="#2196F3"
                 android:textSize="20sp"/>
             <LinearLayout
                 android:layout_width="0dp"
@@ -39,6 +41,7 @@
                     android:text="查询日期"
                     android:layout_weight="1"
                     android:gravity="center_horizontal"
+                    android:textColor="#070101"
                     android:textSize="20sp"/>
                 <TextView
                     android:id="@+id/place_interval"
@@ -46,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:text="乘车区间"
                     android:layout_weight="1"
+                    android:textColor="#070101"
                     android:gravity="center_horizontal"/>
             </LinearLayout>
 
@@ -55,6 +59,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="后一天"
+                android:textColor="#FAF7F7"
+                android:background="#2196F3"
                 android:textSize="20sp"/>
 
         </LinearLayout>

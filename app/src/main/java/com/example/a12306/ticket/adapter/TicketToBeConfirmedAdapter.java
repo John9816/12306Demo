@@ -50,8 +50,11 @@ public class TicketToBeConfirmedAdapter extends BaseAdapter {
         }else {
             ToBeConfirm = (ViewHolder) convertView.getTag();
         }
-        /*ToBeConfirm.name.setText(data.get());*/
-
+        String name1 = data.get(position).get("name").toString();
+        ToBeConfirm.name.setText(name1.split("\\(")[0]);
+        ToBeConfirm.trainNumber.setText(data.get(position).get("trainNumber").toString());
+        ToBeConfirm.date.setText(data.get(position).get("date").toString());
+        ToBeConfirm.setNumber.setText(data.get(position).get("setNumber").toString());
         return convertView;
     }
 

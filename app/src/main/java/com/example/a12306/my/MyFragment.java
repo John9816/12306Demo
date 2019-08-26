@@ -94,14 +94,14 @@ public class MyFragment extends Fragment {
                         view= LayoutInflater.from(getActivity()).inflate(R.layout.activity_password_dialog,null,false);
                         modifypw=view.findViewById(R.id.et_common);
                         builder.setTitle("请输入你的密码");
-                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        AlertDialog.Builder builder = MyFragment.this.builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 alertDialog.dismiss();
                             }
                         });
-                        builder.setView(view);
-                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        MyFragment.this.builder.setView(view);
+                        MyFragment.this.builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 SharedPreferences sp=getActivity().getSharedPreferences("info",MODE_PRIVATE);
@@ -116,7 +116,7 @@ public class MyFragment extends Fragment {
                                 }
                             }
                         });
-                        alertDialog=builder.create();
+                        alertDialog= MyFragment.this.builder.create();
                         alertDialog.show();
                         break;
                     default:

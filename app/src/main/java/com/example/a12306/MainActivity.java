@@ -1,5 +1,6 @@
 package com.example.a12306;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(this);
         rb_ticket.setChecked(true);
+        //点击暂不支付跳转到未支付页面
+        Intent intent = getIntent();
+        if (intent.getIntExtra("order", 0) == 1){
+            viewPager.setCurrentItem(PAGE_TWO);
+        }
     }
 
 
@@ -82,4 +88,5 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 break;
         }
     }
+
 }

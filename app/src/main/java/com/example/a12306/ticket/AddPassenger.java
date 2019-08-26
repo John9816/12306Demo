@@ -33,6 +33,7 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
     private ListView lv_TicketPassengerList;
     public static ArrayList<HashMap<String, Object>> dispalyselected,allselectedpay,intentdata;
     private AddPassengerAdapter adapter;
+    public static AddPassenger addPassenger;
     private static final String TAG = "AddPassenger";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
         toolbar = CONST.usrToolbar(R.id.reservation1Head, "车票预定3/5", this, 0);
         getData();
         init();
+        addPassenger = this;
     }
 
     //绑定控件，初始化
@@ -66,6 +68,7 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
         lv_TicketPassengerList = findViewById(R.id.lv_TicketPassengerList);
         tv_OrderSumPrice = findViewById(R.id.tv_OrderSumPrice);
         tv_Submit = findViewById(R.id.tv_Submit);
+        tv_Submit.setOnClickListener(this);
         dispalyselected = new ArrayList<>();
         allselectedpay = new ArrayList<>();
     }
@@ -102,6 +105,9 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
                 map.put("date",tv_Date.getText().toString());
                 map.put("trainNumber",tv_TrainNumber.getText().toString());
                 map.put("setNumber","1车1座");
+                map.put("sumPeople",adapter.getCount());
+                map.put("sumPrice",(float) adapter.getCount() * Float.parseFloat(setPrice));
+                map.put("place",startPlace+"-"+stopPlace);
                 intentdata.add(map);
                 bundle.putSerializable("ticket", intentdata);
                 intent.putExtras(bundle);
@@ -120,6 +126,7 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
                 dispalyselected.get(i).put("date", tv_Date.getText().toString());
                 dispalyselected.get(i).put("setNumber", "1车1座");
             }
+            Log.d(TAG, "onActivityResult: "+dispalyselected);
             allselectedpay.addAll(dispalyselected);
             adapter = new AddPassengerAdapter(this,dispalyselected);
             lv_TicketPassengerList.setAdapter(adapter);

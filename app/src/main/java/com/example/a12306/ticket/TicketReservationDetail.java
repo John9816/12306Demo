@@ -16,8 +16,10 @@ import com.example.a12306.others.QueryTestData;
 import com.example.a12306.others.TimeCorrection;
 import com.example.a12306.ticket.adapter.TicketReservationDetailAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 //车票预定详细信息
@@ -32,6 +34,7 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
     private String startPlace,stopPlace,traniNumber,startTime,stopTime;
     private String[] ticketinformations;
     private int indexNumber;
+    public static TicketReservationDetail ticketReservationDetail;
     private ArrayList<HashMap<String, Object>> test_data, ticket_info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_ticket_reservation_detail);
         toolbar = CONST.usrToolbar(R.id.reservationhead2, "车票预定2/5", this, 0);
         init();
+        ticketReservationDetail = this;
     }
 
     //控件初始化
@@ -53,6 +57,7 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
         tv_place_interval = findViewById(R.id.place_interval);
         tv_train_number = findViewById(R.id.TrainNumber);
         tv_time_content = findViewById(R.id.TimeContent);
+        tv_time_content.setText(startTime+"-"+stopTime+"    " +Time_conversion(startTime,stopTime));
         listView = findViewById(R.id.result_list);
         setData();
     }
@@ -103,9 +108,6 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
         }
     }
 
-
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -116,8 +118,30 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
                 timeCorrection.nextDay();
                 break;
         }
-
     }
 
-
+    //    将时间从字符串转化为日期类型，计算经过时间
+    private String Time_conversion(String starttime, String stoptime) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date startdate = null;
+        Date stopdate = null;
+        long time_difference = 0;
+        long hours = 0;
+        long minutes = 0;
+        try {
+            startdate = dateFormat.parse(starttime);
+            stopdate = dateFormat.parse(stoptime);
+            time_difference = stopdate.getTime() - startdate.getTime();
+            hours = time_difference / (1000 * 60 * 60);
+            if (hours < 1)
+                hours = 0;
+            minutes = time_difference / (1000* 60) - (hours * 60);
+            if (minutes < 1)
+                minutes = 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return "历时" +hours + "时" + minutes + "分";
+        }
+    }
 }

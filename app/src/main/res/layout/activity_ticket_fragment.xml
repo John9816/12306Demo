@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="北京"
+            android:textColor="#090000"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ImageView
@@ -70,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="大连"
+            android:textColor="#090000"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <ImageView
@@ -100,6 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2014-8-18 周三"
+            android:textColor="#0E0000"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
@@ -112,6 +115,8 @@
         android:layout_marginTop="30dp"
         android:textSize="25sp"
         android:text="查询"
+        android:textColor="#FAF7F7"
+        android:background="#2196F3"
         />
 
     <LinearLayout
@@ -124,7 +129,9 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:text="查询历史"
+            android:textColor="#FAF7F7"
             android:textSize="25sp"
+            android:background="#2196F3"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
        <ListView

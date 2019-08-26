@@ -14,8 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
@@ -24,11 +26,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.a12306.others.CONST.datas;
+
 //添加新的联系人
 public class AddNewContact extends Activity {
     private ListView addnewpassenger;
     private SimpleAdapter adapter;
     private Button add;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +86,34 @@ public class AddNewContact extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 switch (position){
                     case 0:
-
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(AddNewContact.this,R.style.AlertDialogCustom);
+                        View view1= LayoutInflater.from(AddNewContact.this).inflate(R.layout.activity_password_dialog,null,false);
+                        final EditText modifyphone = view1.findViewById(R.id.et_common);
+                        builder1.setTitle("请输入姓名");
+                        builder1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                alertDialog.dismiss();
+                            }
+                        });
+                        builder1.setView(view1);
+                        builder1.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String phone = modifyphone.getText().toString().trim();
+                            }
+                        });
+                        alertDialog=builder1.create();
+                        alertDialog.show();
                         break;
+
                     case 3:
+
 
                         break;
                     case 4:
+
+
 
                 }
             }

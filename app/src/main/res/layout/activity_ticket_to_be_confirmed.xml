@@ -52,7 +52,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="暂不支付"
-                android:textSize="25sp"/>
+                android:textSize="25sp"
+                android:background="#2196F3"/>
 
             <Button
                 android:id="@+id/confirm_submit"
@@ -60,7 +61,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="确认支付"
-                android:textSize="25sp"/>
+                android:textSize="25sp"
+                android:background="#FF9800"/>
 
         </LinearLayout>
     </LinearLayout>
