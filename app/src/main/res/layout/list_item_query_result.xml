@@ -15,18 +15,19 @@
         android:textSize="30sp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="0.2"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/startState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="始"
-            android:layout_weight="1"
-            android:textSize="25sp"
+            android:textSize="15sp"
             android:textColor="#ffffff"
             android:background="#FF5722"/>
         <TextView
@@ -35,18 +36,17 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="终"
-            android:layout_weight="1"
             android:textColor="#ffffff"
-            android:textSize="25sp"
+            android:textSize="15sp"
             android:layout_marginTop="10dp"
             android:background="#8BC34A"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
@@ -56,27 +56,25 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="时间"
-            android:textSize="20sp"/>
+            android:textSize="24sp"/>
         <TextView
             android:id="@+id/stopTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="日期"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 
-    <GridLayout
+    <TextView
         android:id="@+id/gridlayout"
         android:layout_width="0dp"
         android:layout_weight="1.5"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:columnCount="2"
-        android:rowCount="2"
+
         android:orientation="horizontal">
 
-    </GridLayout>
+    </TextView>
 </LinearLayout>

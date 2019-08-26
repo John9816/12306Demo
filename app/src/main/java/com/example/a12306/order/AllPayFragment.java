@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import com.example.a12306.R;
 import com.example.a12306.order.adapter.AllPayAdapter;
+import com.example.a12306.ticket.TicketToBeConfirmed;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,9 +41,10 @@ public class AllPayFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (allPaidTicket.get(position).get("payState").equals("已支付")) {
-                    /*Intent intent = new Intent(getActivity(), Paidstate.class);
+                    Intent intent = new Intent(getActivity(), PaidTicket.class);
                     intent.putExtra("position", position);
-                    startActivity(intent);*/
+                    intent.putExtra("orderId", allPaidTicket.get(position).get("orderId").toString());
+                    startActivity(intent);
                 }
             }
         });

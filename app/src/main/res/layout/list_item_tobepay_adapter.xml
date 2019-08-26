@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:text="姓名"
+        android:textSize="20sp"
+        android:gravity="center_vertical"/>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_name"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/tv_TrainNumber"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="车次"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/tv_Date"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="日期"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:layout_below="@+id/tv_TrainNumber"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_SeatNumber"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/ll"
+        android:text="1车2座"
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:layout_centerHorizontal="true"
+        />
+
+
+
+</RelativeLayout>

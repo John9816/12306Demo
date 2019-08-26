@@ -1,6 +1,7 @@
 package com.example.a12306.ticket.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class QueryResultAdapter extends BaseAdapter {
     private Context context;
     private ResultHolder resultHolder;
     private ArrayList<String[]> tickets;
+    private static final String TAG = "QueryResultAdapter";
 
     public QueryResultAdapter(Context context, ArrayList<HashMap<String, Object>> test_data){
         this.context = context;
@@ -63,16 +65,24 @@ public class QueryResultAdapter extends BaseAdapter {
         resultHolder.stopState.setText(test_data.get(position).get("Stop_state").toString());
         resultHolder.startTime.setText(test_data.get(position).get("Start_time").toString());
         resultHolder.stopTime.setText(test_data.get(position).get("Stop_time").toString());
-        for (String s : tickets.get(position)) {
-            TextView textView = new TextView(context);
-            textView.setText(s);
-            resultHolder.gridLayout.addView(textView);
+        StringBuffer string = new StringBuffer();
+        for (int i = 0; i <tickets.get(position).length ; i++) {
+
+            string.append(tickets.get(position)[i]);
         }
+        resultHolder.gridLayout.setText(string.toString());
+//        for (String s : tickets.get(position)) {
+//            TextView textView = new TextView(context);
+//            textView.setText(s);
+////            resultHolder.gridLayout.addView(textView);
+//        }
+
+        Log.d(TAG, "getView: "+QueryTestData.addData().toString());
         return convertView;
     }
 }
 
 class ResultHolder{
     public TextView trainNumber, startState, stopState, startTime, stopTime;
-    public GridLayout gridLayout;
+    public TextView gridLayout;
 }

@@ -16,24 +16,19 @@ public class QueryTestData {
     public static final String[] Stop_time = new String[]{"12:35", "11:20", "11:55", "12:20", "12:45"};
 
     //数据
-    public static final String[] ticket1 = new String[]{"高级软卧：42", "硬座：45", "一等座：8"};
-    public static final String[] ticket2 = new String[]{"特等座：4", "硬座：20", "软座：7", "硬卧：19"};
-    public static final String[] ticket3 = new String[]{"无座：39", "硬座：38", "一等座：17", "软卧：48"};
-    public static final String[] ticket4 = new String[]{"商务座：20", "一等座：5", "硬卧：50"};
-    public static final String[] ticket5 = new String[]{"高级软卧：10", "特等座：18", "硬座：33"};
+    public static final String[] ticket1 = new String[]{"高级软卧：42", "硬座：45\n", "一等座：8"};
+    public static final String[] ticket2 = new String[]{"特等座：4", "硬座：20\n", "软座：7", "硬卧：19"};
+    public static final String[] ticket3 = new String[]{"无座：39", "硬座：38\n", "一等座：17", "软卧：48"};
+    public static final String[] ticket4 = new String[]{"商务座：20", "一等座：5\n", "硬卧：50"};
+    public static final String[] ticket5 = new String[]{"高级软卧：10", "特等座：18\n", "硬座：33"};
 
     public static ArrayList<String[]> addData(){
         ArrayList<String[]> tickets = new ArrayList<>();
         tickets.add(ticket1);
-        Log.d(TAG, "addData: "+tickets.get(0).toString());
         tickets.add(ticket2);
-        Log.d(TAG, "addData: "+tickets.get(1).toString());
         tickets.add(ticket3);
-        Log.d(TAG, "addData: "+tickets.toString());
         tickets.add(ticket4);
-        Log.d(TAG, "addData: "+tickets.toString());
         tickets.add(ticket5);
-        Log.d(TAG, "addData: "+tickets.toString());
         return tickets;
     }
 }

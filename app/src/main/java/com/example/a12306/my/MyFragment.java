@@ -94,7 +94,7 @@ public class MyFragment extends Fragment {
                         view= LayoutInflater.from(getActivity()).inflate(R.layout.activity_password_dialog,null,false);
                         modifypw=view.findViewById(R.id.et_common);
                         builder.setTitle("请输入你的密码");
-                        AlertDialog.Builder builder = MyFragment.this.builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        MyFragment.this.builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 alertDialog.dismiss();

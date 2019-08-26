@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ticket.TicketReservationSuccess"></activity>
+        <activity android:name=".order.PaidTicket"></activity>
+        <activity android:name=".order.ToBePay" />
+        <activity android:name=".ticket.TicketReservationSuccess" />
         <activity android:name=".ticket.TicketToBeConfirmed" />
         <activity android:name=".ticket.SelectedPassenger" />
         <activity android:name=".ticket.TicketReservationDetail" />

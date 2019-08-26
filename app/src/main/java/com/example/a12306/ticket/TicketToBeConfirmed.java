@@ -30,6 +30,7 @@ public class TicketToBeConfirmed extends AppCompatActivity implements View.OnCli
     public static ArrayList<HashMap<String, Object>> allPayTicket = new ArrayList<>();
     public static ArrayList<HashMap<String, Object>> data = new ArrayList<>();
     public static TicketToBeConfirmed ticketToBeConfirmed;
+    public static ArrayList<ArrayList<HashMap<String, Object>>> content  = new ArrayList<>();
     private static final String TAG = "TicketToBeConfirmed";
 
     @Override
@@ -56,6 +57,7 @@ public class TicketToBeConfirmed extends AppCompatActivity implements View.OnCli
         Log.d(TAG, "getData: "+data.get(0).get("orderId").toString());
         TicketToBeConfirmedAdapter adapter = new TicketToBeConfirmedAdapter(this,AddPassenger.dispalyselected);
         lv_ticket_details.setAdapter(adapter);
+        content.add(AddPassenger.dispalyselected);
     }
 
     @Override

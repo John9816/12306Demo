@@ -32,15 +32,13 @@ public class UnPayFragment extends Fragment {
         lv_unPay = getActivity().findViewById(R.id.lv_unPay);
         unPayAdapter = new AllPayAdapter(getActivity(), TicketToBeConfirmed.unpayTicket);
         lv_unPay.setAdapter(unPayAdapter);
-
-
         lv_unPay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               /* Intent intent = new Intent(getActivity(), WaitePay.class);
+               Intent intent = new Intent(getActivity(), ToBePay.class);
                 intent.putExtra("position", position);
                 intent.putExtra("orderId", TicketToBeConfirmed.unpayTicket.get(position).get("orderId").toString());
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
 
