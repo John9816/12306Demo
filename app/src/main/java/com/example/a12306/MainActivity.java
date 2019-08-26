@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         setContentView(R.layout.activity_main);
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         initView();
-        rb_ticket.setChecked(true);
-
     }
 
     private void initView() {
@@ -38,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         viewPager.setAdapter(mAdapter);
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(this);
+        rb_ticket.setChecked(true);
     }
 
 
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     }
 
     @Override
-    public void onPageSelected(int i) {
+    public void onPageSelected(int i){
 
     }
 

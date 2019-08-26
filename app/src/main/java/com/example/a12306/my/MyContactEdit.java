@@ -156,6 +156,7 @@ public class MyContactEdit extends Activity {
 
                 //获取姓名
                 String name =  map1.get("key2").toString();
+                Log.d(TAG, "onClick: "+name);
                 //获取性别
                 String type = map4.get("key2").toString();
                 //获取电话号码

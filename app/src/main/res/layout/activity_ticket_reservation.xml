@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/reservation1Head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/last_day"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="前一天"
+                android:textSize="20sp"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/query_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="查询日期"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/place_interval"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="乘车区间"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/next_day"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="后一天"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/result_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

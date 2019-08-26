@@ -1,37 +1,48 @@
 package com.example.a12306.ticket;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.a12306.MainActivity;
 import com.example.a12306.R;
+import com.example.a12306.others.CONST;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+
+import static android.content.ContentValues.TAG;
 
 //订票
 public class TicketFragment extends Fragment implements View.OnClickListener{
     private View view;
     private TextView tvTicketStationFrom,tvTicketStationTo,tvTicketDateFrom;
     private ImageView imgTicketExchange;
+    private Button btnTicketQuery;
+    private ListView lv_query_history;
+    private ArrayAdapter<String> adapter;
+    private Calendar calendar;
+    private int Year,Month,Day;
     public TicketFragment(){
 
     }
+
+    private static final String TAG = "TicketFragment";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,6 +53,7 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
 
     //控件初始化
     private void initView() {
+        calendar = Calendar.getInstance();
         tvTicketStationFrom = (TextView)view.findViewById(R.id.tvTicketStationFrom);
         tvTicketStationFrom.setOnClickListener(this);
         tvTicketStationTo = (TextView)view.findViewById(R.id.tvTicketStationTo);
@@ -49,7 +61,17 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
         imgTicketExchange = (ImageView)view.findViewById(R.id.imgTicketExchange);
         imgTicketExchange.setOnClickListener(this);
         tvTicketDateFrom = (TextView)view.findViewById(R.id.tvTicketDateFrom);
+        tvTicketDateFrom.setText(calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) +
+                "-" + calendar.get(Calendar.DAY_OF_MONTH));
         tvTicketDateFrom.setOnClickListener(this);
+        btnTicketQuery = (Button)view.findViewById(R.id.btnTicketQuery);
+        btnTicketQuery.setOnClickListener(this);
+        lv_query_history = (ListView)view.findViewById(R.id.lv_query_history);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_expandable_list_item_1,
+                CONST.query_history);
+        lv_query_history.setAdapter(adapter);
+
+
     }
 
     //全局按钮事件的监听
@@ -58,38 +80,74 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()){
             //出发地
             case R.id.tvTicketStationFrom:
-                Intent intent = new Intent(getActivity(),CityActivity.class);
-                startActivity(intent);
+                SelectCityList(tvTicketStationFrom);
                 break;
                 //目的地
             case R.id.tvTicketStationTo:
-                Intent intent1 = new Intent(getActivity(),CityActivity.class);
-                startActivity(intent1);
+                SelectCityList(tvTicketStationTo);
                 break;
                 //图片切换出发地和目的地
             case R.id.imgTicketExchange:
                 break;
                 //查询时间选择
             case R.id.tvTicketDateFrom:
-                Calendar cale1 = Calendar.getInstance();
-                new DatePickerDialog(getActivity(),new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                          int dayOfMonth) {
-                      tvTicketDateFrom.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        tvTicketDateFrom.setText(year + "-" + month + "-" + dayOfMonth);
+                        Year = year;
+                        Month = month + 1;
+                        Day = dayOfMonth;
                     }
+                },calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.setCancelable(false);
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                dialog.show();
+                break;
+                //查询历史
+            case R.id.btnTicketQuery:
+            CONST.query_history.add(tvTicketStationFrom.getText().toString() + "------------------" +
+                    "-----" + tvTicketStationTo.getText().toString());
+            adapter.notifyDataSetChanged();//列表刷新
+                Intent intent = new Intent(getActivity(),TicketReservation.class);
+                if(Year == 0 || Month == 0|| Day == 0){
+                    Year = calendar.get(Calendar.YEAR);
+                    Month = calendar.get(Calendar.MONTH) + 1;
+                    Day = calendar.get(Calendar.DAY_OF_MONTH);
                 }
-                        ,cale1.get(Calendar.YEAR)
-                        ,cale1.get(Calendar.MONTH)
-                        ,cale1.get(Calendar.DAY_OF_MONTH)).show();
+                Bundle bundle = new Bundle();
+                bundle.putInt("Year",Year);
+                bundle.putInt("Month",Month);
+                bundle.putInt("Day",Day);
+                bundle.putString("startPlace",
+                        tvTicketStationFrom.getText().toString() );
+                bundle.putString("stopPlace",tvTicketStationTo.getText().toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                break;
+
+
+
 
         }
 
     }
 
-
-
-
+    //选择城市列表
+    private void SelectCityList(final  TextView tv_place) {
+       AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+       alert.setItems(CONST.cities, new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               tv_place.setText(CONST.cities[which]);
+               dialog.cancel();
+           }
+       });
+       alert.setTitle("请选择城市:");
+       alert.create().show();
+    }
 
 
 }

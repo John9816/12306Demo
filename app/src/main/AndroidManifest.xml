@@ -9,14 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".my.AddNewContact"
+        <activity android:name=".ticket.TicketToBeConfirmed"></activity>
+        <activity android:name=".ticket.SelectedPassenger" />
+        <activity android:name=".ticket.TicketReservationDetail" />
+        <activity android:name=".ticket.TicketReservation" />
+        <activity
+            android:name=".my.AddNewContact"
             android:label="添加联系人"
-            android:theme="@android:style/Theme.Holo.Light"/>
-        <activity android:name=".my.MyContactEdit"
+            android:theme="@android:style/Theme.Holo.Light" />
+        <activity
+            android:name=".my.MyContactEdit"
             android:label="联系人编辑"
-            android:theme="@android:style/Theme.Holo.Light"/>
-        <activity android:name=".ticket.CityActivity" />
+            android:theme="@android:style/Theme.Holo.Light" />
         <activity android:name=".ticket.AddPassenger" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
@@ -35,6 +39,7 @@
         <activity android:name=".BootPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

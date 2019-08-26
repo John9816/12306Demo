@@ -18,16 +18,17 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.a12306.R;
+import com.example.a12306.others.CONST;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//添加新的联系人
 public class AddNewContact extends Activity {
     private ListView addnewpassenger;
-    private List<Map<String,Object>> data;
     private SimpleAdapter adapter;
+    private Button add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,36 +38,37 @@ public class AddNewContact extends Activity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        add = (Button)findViewById(R.id.add);
         addnewpassenger = findViewById(R.id.addnewpassenger);
         Map<String,Object> contact = (HashMap<String, Object>) getIntent().getSerializableExtra("row");
-        data = new ArrayList<>();
-        Map<String,Object> map1 = new HashMap<>();
+        CONST.passenger_informationt = new ArrayList<>();
+        Map<String, Object> map1 = new HashMap<>();
 
         map1.put("key1","姓名");
         //split拆分法，以括号拆分
         map1.put("key3",R.drawable.forward_25);
-        data.add(map1);
+        CONST.passenger_informationt.add(map1);
 
-        Map<String,Object> map2 = new HashMap<>();
+        HashMap<String, Object> map2 = new HashMap<>();
         map2.put("key1","证件类型");
-        data.add(map2);
+        CONST.passenger_informationt.add(map2);
 
-        Map<String,Object> map3 = new HashMap<>();
+        HashMap<String, Object> map3 = new HashMap<>();
         map3.put("key1","证件号码");
-        data.add(map3);
+        CONST.passenger_informationt.add(map3);
 
-        Map<String,Object> map4 = new HashMap<>();
+        HashMap<String, Object> map4 = new HashMap<>();
         map4.put("key1","乘客类型");
         map4.put("key3",R.drawable.forward_25);
-        data.add(map4);
+        CONST.passenger_informationt.add(map4);
 
-        Map<String,Object> map5 = new HashMap<>();
+        HashMap<String, Object> map5 = new HashMap<>();
         map5.put("key1","电话");
         map5.put("key3",R.drawable.forward_25);
-        data.add(map5);
+        CONST.passenger_informationt.add(map5);
 
         adapter = new SimpleAdapter(this,
-                data,
+                CONST.passenger_informationt,
                 R.layout.list_item_my_contact_edit_layout,
                 new String[]{"key1","key2","key3"},
                 new int[]{R.id.tv_MyContact_edit_key,R.id.tv_MyContact_edit_value,R.id.img_MyContact_edit_flag});
@@ -90,6 +92,12 @@ public class AddNewContact extends Activity {
         });
 
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 

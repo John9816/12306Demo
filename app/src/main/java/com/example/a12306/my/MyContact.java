@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.example.a12306.R;
+import com.example.a12306.others.CONST;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,10 +29,8 @@ public class MyContact extends Activity {
 
     private ListView lvMyContact;
     private static final int REQUEST_CODE = 1001;
-    private List<Map<String, Object>> datas;
     private SimpleAdapter adapter;
     private static final String TAG = "MyContact";
-    private Map<String, Object> map1,map2,map3;
     private int point;
     private SharedPreferences sharedPreferences;
 
@@ -43,7 +43,7 @@ public class MyContact extends Activity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         lvMyContact = findViewById(R.id.lv_mycontact);
-        datas = new ArrayList<>();
+        CONST.passenger_informationt = new ArrayList<>();
         //judge();
         initData();
         lvMyContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,7 +51,7 @@ public class MyContact extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
                 intent.setClass(MyContact.this, MyContactEdit.class);
-                intent.putExtra("row", (Serializable) datas.get(position));
+                intent.putExtra("row", (Serializable) CONST.passenger_informationt.get(position));
                 Log.d(TAG, "onItemClick: "+position);
                 point = position;
                 startActivityForResult(intent,REQUEST_CODE);
@@ -77,33 +77,34 @@ public class MyContact extends Activity {
 
     //初始化数据
     private void initData() {
+        if (CONST.passenger_informationt.size()<=0) {
+            Map<String, Object> map1 = new HashMap<String, Object>();
+            map1.put("idCard", "身份证:123");
+            map1.put("name", "张三(成人)");
+            map1.put("tel", "电话:1234");
+            CONST.passenger_informationt.add(map1);
 
-        map1 = new HashMap<>();
-        map1.put("idCard", "身份证:123");
-        map1.put("name", "张三(成人)");
-        map1.put("tel", "电话:1234");
-        datas.add(map1);
+            Map<String, Object> map2 = new HashMap<String, Object>();
+            map2.put("name", "李四(成人)");
+            map2.put("idCard", "身份证:12345");
+            map2.put("tel", "电话:123456");
+            CONST.passenger_informationt.add(map2);
 
-        map2 = new HashMap<>();
-        map2.put("name", "李四(成人)");
-        map2.put("idCard", "身份证:12345");
-        map2.put("tel", "电话:123456");
-        datas.add(map2);
-
-        map3 = new HashMap<>();
-        map3.put("name", "王二(学生)");
-        map3.put("idCard", "学生证:1234567");
-        map3.put("tel", "电话:12345678");
-        datas.add(map3);
-
+            Map<String, Object> map3 = new HashMap<String, Object>();
+            map3.put("name", "王二(学生)");
+            map3.put("idCard", "学生证:1234567");
+            map3.put("tel", "电话:12345678");
+            CONST.passenger_informationt.add(map3);
+        }
         adapter = new SimpleAdapter(this,
-                datas,
+                CONST.passenger_informationt,
                 R.layout.list_item_my_contact_list_layout,
-                new String[]{"name", "idCard", "tel", "image"},
+                new String[]{"name", "idCard", "tel"},
                 new int[]{R.id.tvContactName, R.id.tvContactIdCard, R.id.tvContactTel});
 
         lvMyContact.setAdapter(adapter);
         Log.d(TAG, "initData: "+"onCreate");
+        Log.d(TAG, "initData: "+ CONST.passenger_informationt);
     }
 
     //ActionBar重写的方法
@@ -143,10 +144,10 @@ public class MyContact extends Activity {
                    String name = data.getStringExtra("name");
                    String type = data.getStringExtra("type");
                    String telephone = data.getStringExtra("telephone");
-                    Log.d(TAG, "onActivityResult: "+datas.get(point));
+                    Log.d(TAG, "onActivityResult: "+CONST.passenger_informationt.get(point));
                     String append = name + "(" + type + ")";
-                    datas.get(point).put("name",append);
-                    datas.get(point).put("tel","电话:"+telephone);
+                    CONST.passenger_informationt.get(point).put("name",append);
+                    CONST.passenger_informationt.get(point).put("tel","电话:"+telephone);
                     adapter.notifyDataSetChanged();
                     Log.d(TAG, "onActivityResult: "+"创建2");
 
