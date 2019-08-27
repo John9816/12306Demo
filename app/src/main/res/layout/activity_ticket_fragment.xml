@@ -119,9 +119,11 @@
         android:background="#2196F3"
         />
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="40dp">
 
         <TextView
@@ -134,12 +136,29 @@
             android:background="#2196F3"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-       <ListView
-           android:id="@+id/lv_query_history"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:background="#DBDEE0"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-       </ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DBDEE0"/>
+            <ListView
+                android:id="@+id/lv_query_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

@@ -23,6 +23,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
                 style="@style/tab_menu_item"
+                android:background="@drawable/selector"
                 android:layout_weight="1" />
             <TextView
                 android:layout_width="1dp"
@@ -35,7 +36,8 @@
                 style="@style/tab_menu_item"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@drawable/selector"/>
 
             <TextView
                 android:layout_width="1dp"
@@ -48,7 +50,8 @@
                 style="@style/tab_menu_item"
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@drawable/selector"/>
 
 
         </RadioGroup>

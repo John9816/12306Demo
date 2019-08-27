@@ -9,15 +9,19 @@
     <ListView
         android:id="@+id/addnewpassenger"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     </ListView>
 
     <Button
         android:id="@+id/add"
         android:layout_below="@+id/addnewpassenger"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="添加"
+        android:textSize="25sp"
+        android:padding="20dp"
+        android:background="#2196F3"
+        android:textColor="#fff"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
 

@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         switch (checkedId) {
             case R.id.rb_ticket:
                 viewPager.setCurrentItem(PAGE_ONE);
+
                 break;
             case R.id.rb_order:
                 viewPager.setCurrentItem(PAGE_TWO);

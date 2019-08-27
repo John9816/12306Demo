@@ -3,8 +3,7 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/reservation1Head"
@@ -27,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="北京"
+                android:textColor="#070606"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -50,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="D5"
+                android:textColor="#070606"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <ImageView
@@ -77,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="大连"
+                android:textColor="#070606"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -141,14 +143,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginBottom="50dp" >
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="bottom">
 
         <TextView
             android:id="@+id/tv_OrderSumPrice"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:textSize="25sp"
             android:gravity="center_vertical"
             android:text="订单总额:￥314元" />
 

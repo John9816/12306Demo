@@ -17,6 +17,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="未支付"
+            android:background="@drawable/selector"
             android:button="@null"
             />
         <TextView
@@ -29,6 +30,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="全部支付"
+            android:background="@drawable/selector"
             android:button="@null"/>
 
     </RadioGroup>

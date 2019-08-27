@@ -1,0 +1,11 @@
+package com.example.a12306.utils;
+
+/**
+ * Created by 皓哥~_~ on 2018/8/23.
+ */
+
+public interface CONSTANT {
+    String HOST = "http://100.0.101.16:8080/My12306";
+    int REQUEST_TIMEOUT = 3000;
+    int SO_TIMEOUT = 3000;
+}

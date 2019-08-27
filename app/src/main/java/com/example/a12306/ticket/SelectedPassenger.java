@@ -3,6 +3,7 @@ package com.example.a12306.ticket;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SelectedPassenger extends AppCompatActivity {
+    private Toolbar toolbar;
     private ListView lv_passengerlist;
     private Button btn_addPassenger;
     private HashMap<String, Object> itemContent, hashMap;
@@ -28,6 +30,7 @@ public class SelectedPassenger extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_passenger);
+        toolbar = CONST.usrToolbar(R.id.selectedhead, "", this, 0);
         lv_passengerlist = findViewById(R.id.lv_passengerlist);
         btn_addPassenger = findViewById(R.id.btn_addPassenger);
         if (CONST.passenger_informationt.size()<=0) {

@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -38,6 +41,7 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
     private ArrayAdapter<String> adapter;
     private Calendar calendar;
     private int Year,Month,Day;
+    private String stationFrom,stationTo;
     public TicketFragment(){
 
     }
@@ -70,8 +74,6 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_expandable_list_item_1,
                 CONST.query_history);
         lv_query_history.setAdapter(adapter);
-
-
     }
 
     //全局按钮事件的监听
@@ -88,13 +90,57 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 break;
                 //图片切换出发地和目的地
             case R.id.imgTicketExchange:
+                stationFrom = tvTicketStationFrom.getText().toString();
+                stationTo = tvTicketStationTo.getText().toString();
+                TranslateAnimation animationFrom = new TranslateAnimation(0, 650, 0, 0);
+                TranslateAnimation animationTo = new TranslateAnimation(0, 650, 0, 0);
+                animationFrom.setDuration(300);
+                animationFrom.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        tvTicketStationFrom.setText(stationTo);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+                animationFrom.setDuration(300);
+                animationFrom.setInterpolator(new AccelerateDecelerateInterpolator());
+                animationFrom.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        tvTicketStationTo.setText(stationFrom);
+                        tvTicketStationFrom.setText(stationTo);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+                tvTicketStationTo.startAnimation(animationTo);
+                tvTicketStationFrom.startAnimation(animationFrom);
+
                 break;
                 //查询时间选择
             case R.id.tvTicketDateFrom:
                 DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        tvTicketDateFrom.setText(year + "-" + month + "-" + dayOfMonth);
+                        tvTicketDateFrom.setText(year + "-" + (month+1) + "-" + dayOfMonth);
                         Year = year;
                         Month = month + 1;
                         Day = dayOfMonth;

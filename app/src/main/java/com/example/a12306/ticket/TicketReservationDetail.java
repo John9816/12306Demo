@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
     private int indexNumber;
     public static TicketReservationDetail ticketReservationDetail;
     private ArrayList<HashMap<String, Object>> test_data, ticket_info;
+    private static final String TAG = "TicketReservationDetail";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,23 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
         toolbar = CONST.usrToolbar(R.id.reservationhead2, "车票预定2/5", this, 0);
         init();
         ticketReservationDetail = this;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.last_day:
+                timeCorrection.lastDay();
+
+                break;
+            case R.id.next_day:
+                timeCorrection.nextDay();
+                year = timeCorrection.getYear();
+                day = timeCorrection.getDay();
+                month = timeCorrection.getMonth();
+                break;
+        }
     }
 
     //控件初始化
@@ -85,6 +104,7 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
         ticketinformations = new String[] {
                 String.valueOf(year), String.valueOf(month), String.valueOf(day), startPlace,stopPlace, traniNumber,
                 startTime, stopTime};
+        Log.d(TAG, "setData: "+String.valueOf(day));
         TicketReservationDetailAdapter adapter = new TicketReservationDetailAdapter(this,
                 test_data,ticket_info,ticketinformations);
         listView.setAdapter(adapter);
@@ -108,17 +128,7 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.last_day:
-                timeCorrection.lastDay();
-                break;
-            case R.id.next_day:
-                timeCorrection.nextDay();
-                break;
-        }
-    }
+
 
     //    将时间从字符串转化为日期类型，计算经过时间
     private String Time_conversion(String starttime, String stoptime) {
