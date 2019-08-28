@@ -1,13 +1,16 @@
 package com.example.a12306.my;
 
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +24,18 @@ import android.widget.Toast;
 import com.example.a12306.LoginActivity;
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
+import com.example.a12306.utils.CONSTANT;
+import com.example.a12306.utils.NetUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -37,6 +47,8 @@ public class MyFragment extends Fragment {
     private Button btn_esc;
     private AlertDialog alertDialog;
     private AlertDialog.Builder builder;
+    private ProgressDialog progressDialog = null;
+    private static final String TAG = "MyFragment";
 
     private int Images[] = {R.drawable.mycontact,R.drawable.mycontact,R.drawable.mycontact};
 
@@ -53,13 +65,14 @@ public class MyFragment extends Fragment {
         btn_esc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sp = getActivity().getSharedPreferences("info", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putBoolean("ISCHECKED",false);
-                editor.commit();
-                getActivity().finish();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                //1、检查网络连接是否正常
+                if (!NetUtils.check(getActivity())) {
+                    Toast.makeText(getActivity(), "网络异常，请检查！", Toast.LENGTH_LONG).show();
+                    return;//后续代码不执行
+                }
+                //执行异步任务，退出登录
+                new LogoutTask().execute();
+
             }
         });
         List<Map<String, Object>> listitem = new ArrayList<Map<String, Object>>();
@@ -126,6 +139,70 @@ public class MyFragment extends Fragment {
             }
         });
 
+}
+
+//执行异步任务退出登陆
+   class LogoutTask extends AsyncTask<String,String,String> {
+    SharedPreferences preferences = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+    @Override
+    protected void onPreExecute() {
+        progressDialog = ProgressDialog.show(getActivity(),null,"正在加载中......",false,true);
+        super.onPreExecute();
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        String result = null;
+        //读取已经存好的sessionId
+
+        String value = preferences.getString("cookie", "");
+        Log.d(TAG, "doInBackground: 读取的sessionId：" + value);
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .addHeader("Cookie", value)
+                    .url(CONSTANT.HOST + "/otn/Logout")
+                    .build();
+            Response response = client.newCall(request).execute();
+            result = response.body().string();
+            Log.d(TAG, "获取的服务器数据： " + result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    @Override
+    protected void onPostExecute(String result) {
+       
+        super.onPostExecute(result);
+        if (progressDialog != null)
+            progressDialog.dismiss();
+
+        // "1"
+        if ("\"1\"".equals(result)) {
+            Toast.makeText(getActivity(), "退出成功", Toast.LENGTH_SHORT)
+                    .show();
+            preferences.edit().clear().commit();
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        } else if ("\"0\"".equals(result)) {
+            Toast.makeText(getActivity(), "退出登录失败", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            Toast.makeText(getActivity(), "服务器错误，请重试", Toast.LENGTH_SHORT)
+                    .show();
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
+
+    }
 }
 }
 
