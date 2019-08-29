@@ -21,7 +21,12 @@ import com.example.a12306.ticket.TicketToBeConfirmed;
 import com.example.a12306.ticket.adapter.TicketToBeConfirmedAdapter;
 import com.example.a12306.utils.QRCodeUtils;
 import com.gyf.immersionbar.ImmersionBar;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class PaidTicket extends AppCompatActivity {
 
     private Button btn_check;

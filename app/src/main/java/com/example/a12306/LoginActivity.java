@@ -35,7 +35,12 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //登陆界面
 public class LoginActivity extends AppCompatActivity{
     private EditText edtUsername = null;

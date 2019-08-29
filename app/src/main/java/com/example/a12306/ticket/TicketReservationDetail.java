@@ -23,7 +23,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //车票预定详细信息
 public class TicketReservationDetail extends AppCompatActivity implements View.OnClickListener {
     private Toolbar toolbar;

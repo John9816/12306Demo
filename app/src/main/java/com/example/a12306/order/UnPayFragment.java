@@ -15,7 +15,12 @@ import com.example.a12306.R;
 import com.example.a12306.order.adapter.AllPayAdapter;
 import com.example.a12306.ticket.TicketToBeConfirmed;
 import com.gyf.immersionbar.ImmersionBar;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class UnPayFragment extends Fragment {
     private ListView lv_unPay;
     public static AllPayAdapter unPayAdapter;

@@ -18,7 +18,12 @@ import com.example.a12306.ticket.TicketReservationSuccess;
 import com.example.a12306.ticket.TicketToBeConfirmed;
 import com.example.a12306.ticket.adapter.TicketToBeConfirmedAdapter;
 import com.gyf.immersionbar.ImmersionBar;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //订单状态
 public class ToBePay extends AppCompatActivity implements View.OnClickListener {
     private Button btn_cancel,btn_confirm;

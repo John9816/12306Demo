@@ -8,15 +8,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.example.a12306.R;
 import com.example.a12306.order.AllPayFragment;
 import com.example.a12306.others.CONST;
 import com.example.a12306.utils.QRCodeUtils;
 import com.gyf.immersionbar.ImmersionBar;
-
 import static com.example.a12306.ticket.TicketToBeConfirmed.data;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class TicketReservationSuccess extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageView QRCode;

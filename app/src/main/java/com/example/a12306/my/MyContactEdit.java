@@ -18,8 +18,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.example.a12306.R;
-import com.gyf.immersionbar.ImmersionBar;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +25,12 @@ import java.util.List;
 import java.util.Map;
 
 import static com.example.a12306.others.CONST.passenger;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 
 public class MyContactEdit extends Activity {
 

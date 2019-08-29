@@ -29,8 +29,12 @@ import java.util.Map;
 import java.util.zip.Inflater;
 
 import static com.example.a12306.ticket.AddPassenger.dispalyselected;
-
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class MyContact extends Activity {
 
     private ListView lvMyContact;

@@ -26,7 +26,12 @@ import java.util.Map;
 import static com.example.a12306.others.CONST.datas;
 import static com.example.a12306.others.CONST.passenger;
 import static com.example.a12306.others.CONST.titles;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //我的账户
 public class MyAccount extends Activity {
     private List<Map<String,Object>> listdata;

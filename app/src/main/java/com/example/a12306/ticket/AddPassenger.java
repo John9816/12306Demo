@@ -26,7 +26,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class AddPassenger extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener {
     private Toolbar toolbar;
     private String year,month,day,startPlace,stopPlace,trainNumber,startTime,stopTime,setType,setPrice;

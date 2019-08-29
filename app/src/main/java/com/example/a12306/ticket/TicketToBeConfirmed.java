@@ -20,6 +20,12 @@ import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //订单确认，车票预定4/5
 public class TicketToBeConfirmed extends AppCompatActivity implements View.OnClickListener {
     private ListView lv_ticket_details;

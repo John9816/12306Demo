@@ -19,7 +19,12 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //订单
 public class OrderFragment extends Fragment implements RadioGroup.OnCheckedChangeListener{
     public static final int UNPAY = 0;

@@ -32,7 +32,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import static android.content.ContentValues.TAG;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //订票
 public class TicketFragment extends Fragment implements View.OnClickListener{
     private View view;

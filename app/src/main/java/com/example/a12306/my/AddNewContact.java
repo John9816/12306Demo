@@ -32,7 +32,12 @@ import java.util.Map;
 import static com.example.a12306.others.CONST.datas;
 import static com.example.a12306.others.CONST.passenger;
 import static com.example.a12306.ticket.TicketToBeConfirmed.data;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //添加新的联系人
 public class AddNewContact extends Activity {
     private ListView addnewpassenger;
@@ -46,6 +51,7 @@ public class AddNewContact extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_contact);
+
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

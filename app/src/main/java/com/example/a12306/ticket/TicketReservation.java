@@ -10,19 +10,22 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
 import com.example.a12306.others.QueryTestData;
 import com.example.a12306.others.TimeCorrection;
 import com.example.a12306.ticket.adapter.QueryResultAdapter;
 import com.gyf.immersionbar.ImmersionBar;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class TicketReservation extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Toolbar toolbar;

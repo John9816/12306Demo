@@ -18,7 +18,12 @@ import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class SelectedPassenger extends AppCompatActivity {
     private Toolbar toolbar;
     private ListView lv_passengerlist;
