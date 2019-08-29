@@ -17,7 +17,10 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="未支付"
+            android:textSize="20sp"
+            android:layout_gravity="center_vertical"
             android:background="@drawable/selector"
+            style="@style/tab_menu_item"
             android:button="@null"
             />
         <TextView
@@ -30,6 +33,9 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="全部支付"
+            android:textSize="20sp"
+            style="@style/tab_menu_item"
+            android:layout_gravity="center_vertical"
             android:background="@drawable/selector"
             android:button="@null"/>
 

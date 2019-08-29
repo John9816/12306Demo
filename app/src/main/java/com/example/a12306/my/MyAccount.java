@@ -17,6 +17,8 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
+import com.gyf.immersionbar.ImmersionBar;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

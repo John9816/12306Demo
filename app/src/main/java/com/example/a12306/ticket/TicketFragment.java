@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.example.a12306.MainActivity;
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,6 +59,7 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
 
     //控件初始化
     private void initView() {
+        ImmersionBar.with(this).init();
         calendar = Calendar.getInstance();
         tvTicketStationFrom = (TextView)view.findViewById(R.id.tvTicketStationFrom);
         tvTicketStationFrom.setOnClickListener(this);
@@ -173,9 +176,6 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
-
-
-
 
         }
 

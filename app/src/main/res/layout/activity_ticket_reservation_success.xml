@@ -12,13 +12,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="8"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_margin="20dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你可以通过二维码扫码取票"
+            android:textSize="25sp"
+            android:textColor="#FF5722"/>
+
         <ImageView
+            android:id="@+id/QRCode"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:background="#3F51B5"/>

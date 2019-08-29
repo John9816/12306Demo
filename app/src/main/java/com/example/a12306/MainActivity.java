@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.gyf.immersionbar.ImmersionBar;
+
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,
         ViewPager.OnPageChangeListener {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     }
 
     private void initView() {
+        ImmersionBar.with(this).init();
         rb_ticket = (RadioButton)findViewById(R.id.rb_ticket);
         rb_order = (RadioButton)findViewById(R.id.rb_order);
         rb_my = (RadioButton)findViewById(R.id.rb_my);

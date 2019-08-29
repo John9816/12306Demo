@@ -16,6 +16,7 @@ import com.example.a12306.others.CONST;
 import com.example.a12306.others.QueryTestData;
 import com.example.a12306.others.TimeCorrection;
 import com.example.a12306.ticket.adapter.QueryResultAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,7 +42,7 @@ public class TicketReservation extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_reservation);
-
+        ImmersionBar.with(this).init();
         calendar = Calendar.getInstance();
         getDate();
         toolbar = CONST.usrToolbar(R.id.reservation1Head, "车票预定1/5", this, 0);

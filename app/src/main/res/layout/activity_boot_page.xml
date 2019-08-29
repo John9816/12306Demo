@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BootPageActivity"
-    android:background="@drawable/splash">
+    android:background="@drawable/splash"
+    android:fitsSystemWindows="true">
 
    <TextView
        android:id="@+id/tv_rec"

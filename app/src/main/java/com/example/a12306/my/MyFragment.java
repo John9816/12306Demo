@@ -176,12 +176,11 @@ public class MyFragment extends Fragment {
 
     @Override
     protected void onPostExecute(String result) {
-       
+
         super.onPostExecute(result);
         if (progressDialog != null)
             progressDialog.dismiss();
 
-        // "1"
         if ("\"1\"".equals(result)) {
             Toast.makeText(getActivity(), "退出成功", Toast.LENGTH_SHORT)
                     .show();

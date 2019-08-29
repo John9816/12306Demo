@@ -2,8 +2,10 @@ package com.example.a12306.my;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,8 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
+import com.example.a12306.ticket.AddPassenger;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.Inflater;
+
+import static com.example.a12306.ticket.AddPassenger.dispalyselected;
 
 
 public class MyContact extends Activity {
@@ -57,6 +63,32 @@ public class MyContact extends Activity {
 
             }
         });
+       /* lvMyContact.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final AlertDialog.Builder aler = new AlertDialog.Builder(MyContact.this);
+                aler.setMessage("是否删除该乘客");
+                aler.setCancelable(false);
+                aler.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       *//* CONST.passenger_informationt.remove(position);
+                        if (CONST.passenger_informationt.size() == 0){
+                            CONST.passenger_informationt = new ArrayList<>();
+                        }
+                        adapter.notifyDataSetChanged();*//*
+                    }
+                });
+                aler.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                aler.create().show();
+                return false;
+            }
+        });*/
     }
 
     //判断是否有数据存在本地
@@ -166,10 +198,6 @@ public class MyContact extends Activity {
                     CONST.passenger_informationt.get(point).put("tel", "电话:" + telephone);
                     adapter.notifyDataSetChanged();
                 }
-
-
-
-
 
         }
     }

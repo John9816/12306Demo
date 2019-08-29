@@ -14,6 +14,7 @@ import android.widget.ListView;
 import com.example.a12306.R;
 import com.example.a12306.order.adapter.AllPayAdapter;
 import com.example.a12306.ticket.TicketToBeConfirmed;
+import com.gyf.immersionbar.ImmersionBar;
 
 public class UnPayFragment extends Fragment {
     private ListView lv_unPay;
@@ -28,7 +29,7 @@ public class UnPayFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ImmersionBar.with(this).init();
         lv_unPay = getActivity().findViewById(R.id.lv_unPay);
         unPayAdapter = new AllPayAdapter(getActivity(), TicketToBeConfirmed.unpayTicket);
         lv_unPay.setAdapter(unPayAdapter);

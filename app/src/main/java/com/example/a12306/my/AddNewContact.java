@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.Serializable;
 import java.util.ArrayList;

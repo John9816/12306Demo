@@ -16,6 +16,7 @@ import com.example.a12306.others.CONST;
 import com.example.a12306.others.QueryTestData;
 import com.example.a12306.others.TimeCorrection;
 import com.example.a12306.ticket.adapter.TicketReservationDetailAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class TicketReservationDetail extends AppCompatActivity implements View.O
 
     //控件初始化
     private void init() {
+        ImmersionBar.with(this).init();
         calendar = Calendar.getInstance();
         getData();
         last_day = (Button)findViewById(R.id.last_day);

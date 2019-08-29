@@ -15,6 +15,7 @@ import com.example.a12306.R;
 import com.example.a12306.order.AllPayFragment;
 import com.example.a12306.others.CONST;
 import com.example.a12306.ticket.adapter.TicketToBeConfirmedAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class TicketToBeConfirmed extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_to_be_confirmed);
+        ImmersionBar.with(this).init();
         toolbar = CONST.usrToolbar(R.id.payHead, "车票预定4/5", this, 0);
         lv_ticket_details = (ListView)findViewById(R.id.lv_ticket_details);
         pause_submit = (Button) findViewById(R.id.pause_submit);
@@ -66,6 +68,9 @@ public class TicketToBeConfirmed extends AppCompatActivity implements View.OnCli
             case R.id.confirm_submit:
                 intent = new Intent(TicketToBeConfirmed.this, TicketReservationSuccess.class);
                 intent.putExtra("code", 0);
+                intent.putExtra("content",data.get(0).get("orderId").toString());
+                String a = data.get(0).get("orderId").toString();
+                Log.d(TAG, "onClick: "+a);
                 allPayTicket = data;
                 allPayTicket.get(0).put("payState", "已支付");
                 AllPayFragment.allPaidTicket.addAll(data);

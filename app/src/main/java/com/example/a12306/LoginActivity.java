@@ -27,6 +27,9 @@ import android.widget.Toast;
 import com.example.a12306.utils.CONSTANT;
 import com.example.a12306.utils.Md5Utils;
 import com.example.a12306.utils.NetUtils;
+import com.gyf.immersionbar.ImmersionBar;
+
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
@@ -90,7 +93,7 @@ public class LoginActivity extends AppCompatActivity{
 
 
     private void initView() {
-
+        ImmersionBar.with(this).init();
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
         tvLostPassword = (TextView)findViewById(R.id.tvLostPassword);

@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/orderId"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="订单提交成功"
             android:textSize="20sp"

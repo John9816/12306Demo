@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
 import com.example.a12306.ticket.adapter.SelectedPassengerAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class SelectedPassenger extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_passenger);
+        ImmersionBar.with(this).init();
         toolbar = CONST.usrToolbar(R.id.selectedhead, "", this, 0);
         lv_passengerlist = findViewById(R.id.lv_passengerlist);
         btn_addPassenger = findViewById(R.id.btn_addPassenger);

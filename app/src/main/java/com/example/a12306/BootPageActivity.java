@@ -12,14 +12,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.a12306.utils.CONSTANT;
-import com.example.a12306.utils.Md5Utils;
 import com.example.a12306.utils.NetUtils;
+import com.gyf.immersionbar.ImmersionBar;
+
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -45,16 +47,16 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
     private final static int COUNT = 3;
     Timer timer = new Timer();//定时器
     private Handler handler;
-    private ProgressDialog dialog;
     private SharedPreferences preferences;
+    private ProgressDialog progressDialog;
     private static final String TAG = "BootPageActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //定义全屏参数
+        /*//定义全屏参数
         int flag = WindowManager.LayoutParams.FLAG_FULLSCREEN;
         //设置当前窗口全屏显示
-        getWindow().setFlags(flag,flag);
+        getWindow().setFlags(flag,flag);*/
         setContentView(R.layout.activity_boot_page);
         initView();
         //正常情况不点击跳过
@@ -75,18 +77,19 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                             }else {
                                 if(preferences.getString("password","").isEmpty()){
                                     Intent intent = new Intent(BootPageActivity.this,LoginActivity.class);
+                                    Log.d(TAG, "handleMessage: "+"未点击跳过");
                                     startActivity(intent);
                                     timer.cancel();
                                     finish();
                                 }else {
-                                    AutoLogin();
+                                   AutoLogin();
                                 }
 
                             }
 
                         }
                         break;
-                   case 1:
+                    case 1:
                         int result = msg.arg1;
                         String sessionId = msg.obj.toString();
                         if(result ==1){
@@ -98,12 +101,15 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                         }
                         break;
 
+
                 }
             }
         };
+
     }
 //自动登陆
-    private void AutoLogin() {
+    private void AutoLogin(){
+
         final String username = preferences.getString("username","");
         final String password = preferences.getString("password","");
 
@@ -174,10 +180,14 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                 }
                 handler.sendMessage(msg);
             }
-        }.start();
-    }
+
+    }.start();
+
+
+}
 
     private void initView() {
+        ImmersionBar.with(this).init();
         tv_rec = (TextView)findViewById(R.id.tv_rec);
         //跳过监听
         tv_rec.setOnClickListener(this);
@@ -199,10 +209,12 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                     preferences = getSharedPreferences("userinfo",MODE_PRIVATE);
                     if(preferences.getString("password","").isEmpty()){
                         Intent intent = new Intent(BootPageActivity.this,LoginActivity.class);
+                        Log.d(TAG, "onClick: "+"点击跳过");
                         startActivity(intent);
+                        timer.cancel();
                         finish();
                     }else {
-                        AutoLogin();
+                     AutoLogin();
                     }
 
             }

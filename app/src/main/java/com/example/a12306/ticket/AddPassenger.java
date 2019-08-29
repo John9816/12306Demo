@@ -20,8 +20,10 @@ import com.example.a12306.R;
 import com.example.a12306.my.MyContact;
 import com.example.a12306.others.CONST;
 import com.example.a12306.ticket.adapter.AddPassengerAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -39,6 +41,7 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_passenger);
+        ImmersionBar.with(this).init();
         toolbar = CONST.usrToolbar(R.id.reservation1Head, "车票预定3/5", this, 0);
         getData();
         init();
@@ -71,6 +74,34 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
         tv_Submit.setOnClickListener(this);
         dispalyselected = new ArrayList<>();
         allselectedpay = new ArrayList<>();
+
+        lv_TicketPassengerList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                final AlertDialog.Builder aler = new AlertDialog.Builder(AddPassenger.this);
+                aler.setMessage("是否删除该乘客");
+                aler.setCancelable(false);
+                aler.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dispalyselected.remove(position);
+                        if (dispalyselected.size() == 0){
+                            dispalyselected = new ArrayList<>();
+                        }
+                       adapter.notifyDataSetChanged();
+                        tv_OrderSumPrice.setText("订单总额：￥"+ (float) adapter.getCount() * Float.parseFloat(setPrice) + "元");
+                    }
+                });
+                aler.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                aler.create().show();
+                return false;
+            }
+        });
     }
 
     //获取2/5传来的数据
@@ -98,9 +129,18 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
             case R.id.tv_Submit:
                 Intent intent = new Intent(AddPassenger.this,TicketToBeConfirmed.class);
                 Bundle bundle = new Bundle();
+                Calendar calendar = Calendar.getInstance();
+                //小时
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                //分钟
+                int minute = calendar.get(Calendar.MINUTE);
+                //秒
+                int second = calendar.get(Calendar.SECOND);
+
                 intentdata = new ArrayList<>();
                 HashMap<String,Object> map = new HashMap<>();
-                map.put("orderId", (String.valueOf(new Random().nextInt(900000) + 100000)) +
+                map.put("orderId", year + month + day + hour + minute + second +
+                        (String.valueOf(new Random().nextInt(900000) + 100000)) +
                         ((char)(int)(Math.random() * 26 + 65)) + ((char)(int)(Math.random() * 26 + 97)));
                 map.put("date",tv_Date.getText().toString());
                 map.put("trainNumber",tv_TrainNumber.getText().toString());
@@ -134,6 +174,7 @@ public class AddPassenger extends AppCompatActivity implements View.OnClickListe
             tv_OrderSumPrice.setText("订单总额：￥"+ (float) adapter.getCount() * Float.parseFloat(setPrice) + "元");
         }
     }
+
 
     //提交订单限制
     private void subLimit() {

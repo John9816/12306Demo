@@ -17,6 +17,7 @@ import com.example.a12306.ticket.AddPassenger;
 import com.example.a12306.ticket.TicketReservationSuccess;
 import com.example.a12306.ticket.TicketToBeConfirmed;
 import com.example.a12306.ticket.adapter.TicketToBeConfirmedAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 
 //订单状态
 public class ToBePay extends AppCompatActivity implements View.OnClickListener {
@@ -31,6 +32,7 @@ public class ToBePay extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_be_pay);
+        ImmersionBar.with(this).init();
         toolbar = CONST.usrToolbar(R.id.tobepay, "订单管理", this, 0);
         textView = (TextView) findViewById(R.id.tv_orderId);
         listView = (ListView)findViewById(R.id.lv_waitPay);

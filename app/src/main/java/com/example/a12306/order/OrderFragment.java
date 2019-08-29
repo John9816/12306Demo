@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 
 import com.example.a12306.R;
 import com.example.a12306.order.adapter.PageAdapter;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class OrderFragment extends Fragment implements RadioGroup.OnCheckedChang
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ImmersionBar.with(this).init();
         radioGroup = getActivity().findViewById(R.id.paid_radiogroup);
         radioGroup.setOnCheckedChangeListener(this);
         unpay = getActivity().findViewById(R.id.unPaid);

@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.example.a12306.R;
+import com.gyf.immersionbar.ImmersionBar;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
