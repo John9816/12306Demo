@@ -348,11 +348,10 @@ public class AddNewContact extends Activity {
                 progressDialog.dismiss();
             }
             if(s.equals("\"1\"")){
-               /* Log.d(TAG, "responseData: "+"1");
-                Intent intent = new Intent(AddNewContact.this,MyContact.class);
-                AddNewContact.this.finish();
-                startActivity(intent);*/
                 Toast.makeText(AddNewContact.this, "添加成功！", Toast.LENGTH_LONG).show();
+                MyContact.myContact.finish();
+                Intent intent = new Intent(AddNewContact.this,MyContact.class);
+                startActivity(intent);
                finish();
 
             }if(s.equals("\"0\"")){

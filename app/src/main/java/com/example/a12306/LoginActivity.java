@@ -198,10 +198,6 @@ public class LoginActivity extends AppCompatActivity{
                 }
             }
         });
-       /* String url = "<a href='http://www.12306.cn'>忘记密码？</a>";
-        CharSequence charSequence = Html.fromHtml(url);
-        tvLostPassword.setText(charSequence);
-        tvLostPassword.setMovementMethod(LinkMovementMethod.getInstance());*/
 
     }
 

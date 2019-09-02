@@ -72,12 +72,9 @@ public class MyContactEdit extends Activity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         btn_contactsave = (Button)findViewById(R.id.btn_contactsave);//保存
         lvMyContactEdit = findViewById(R.id.lv_mycontactedit);
         initData();
-
-
 
         lvMyContactEdit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -162,7 +159,6 @@ public class MyContactEdit extends Activity {
                                 // String matepasswor=sp.getString("password","");
                                 CONST.passenger_info.get(position).put("key2",inputtel);
                                 adapter.notifyDataSetChanged();
-
                             }
                         });
                         alertDialog=builder.create();
@@ -184,7 +180,7 @@ public class MyContactEdit extends Activity {
                 }
               pDialog = ProgressDialog.show(MyContactEdit.this,null,"正在加载中...",
                         false,true);
-                action = "update";
+
         new Thread(){
             @Override
             public void run() {
@@ -203,7 +199,7 @@ public class MyContactEdit extends Activity {
                             .add("证件号码",id)
                             .add("乘客类型",type)
                             .add("电话",tel)
-                            .add("action",action)
+                            .add("action","update")
                             .build();
 
                     Request request = new Request.Builder()
@@ -218,6 +214,11 @@ public class MyContactEdit extends Activity {
                         if(pDialog != null){
                             pDialog.dismiss();
                         }
+
+                        MyContact.myContact.finish();
+                        Intent intent = new Intent(MyContactEdit.this,MyContact.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -225,8 +226,8 @@ public class MyContactEdit extends Activity {
             }
 
         }.start();
-                MyContact.adapter.notifyDataSetChanged();
-                finish();
+
+
             }
         });
     }
@@ -245,7 +246,7 @@ public class MyContactEdit extends Activity {
         CONST.passenger_info.add(map1);
 
         map2 = new HashMap<>();
-        String idCard = (String) contact.get("idCard");
+        String idCard = (String) contact.get("id");
         map2.put("key1","证件类型");
         map2.put("key2",idCard.split("\\:")[0]);
         CONST.passenger_info.add(map2);

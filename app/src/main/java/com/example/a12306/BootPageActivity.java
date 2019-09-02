@@ -70,8 +70,7 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                             if (!NetUtils.check(BootPageActivity.this)) {
                                 Toast.makeText(BootPageActivity.this, "网络异常，请检查！", Toast.LENGTH_LONG).show();
                                 return;//后续代码不执行
-                            }else {
-                                if(preferences.getString("password","").isEmpty()){
+                            }else if(preferences.getString("password","").isEmpty()){
                                     Intent intent = new Intent(BootPageActivity.this,LoginActivity.class);
                                     Log.d(TAG, "handleMessage: "+"未点击跳过");
                                     startActivity(intent);
@@ -80,10 +79,7 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                                 }else {
                                    AutoLogin();
                                 }
-
                             }
-
-                        }
                         break;
                     case 1:
                         int result = msg.arg1;
@@ -210,6 +206,7 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
                         timer.cancel();
                         finish();
                     }else {
+                        timer.cancel();
                      AutoLogin();
                     }
 

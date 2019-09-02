@@ -63,6 +63,7 @@ public class MyContact extends Activity {
     public static SimpleAdapter adapter;
     private static final String TAG = "MyContact";
     private int point;
+    public static MyContact myContact;
     private ProgressDialog pDialog;
     private OkHttpClient client = new OkHttpClient();
     Handler handler = new Handler(){
@@ -105,11 +106,12 @@ public class MyContact extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_contact);
+        Log.d(TAG, "onCreate: ");
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        getData();
+        myContact = this;
         lvMyContact = findViewById(R.id.lv_mycontact);
         adapter = new SimpleAdapter(this,
                 CONST.passenger_info,
@@ -149,10 +151,7 @@ public class MyContact extends Activity {
                         Log.d(TAG, "onClick: "+type);
                         String tel = CONST.passenger_info.get(position).get("phone").toString();
                         Log.d(TAG, "onClick: "+tel);
-
                         remove(name,idType,id,type,tel);
-
-
                     }
                 });
                 alert.setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -164,13 +163,17 @@ public class MyContact extends Activity {
                 alert.create().show();
                 return true;
 
-
             }
         });
 
     }
 
-    private void getData() {
+
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "onResume: ");
+        super.onResume();
         //1、检查网络连接是否正常
         if (!NetUtils.check(MyContact.this)) {
             Toast.makeText(MyContact.this, "网络异常，请检查！", Toast.LENGTH_LONG).show();
@@ -185,7 +188,6 @@ public class MyContact extends Activity {
                 SharedPreferences preferences = MyContact.this.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
                 String value = preferences.getString("cookie","");
                 try {
-
                     Request request = new Request.Builder()
                             .addHeader("Cookie",value)
                             .url(CONSTANT.HOST + "/otn/PassengerList")
@@ -221,6 +223,7 @@ public class MyContact extends Activity {
         }.start();
     }
 
+
     //删除乘客
     private void remove(final String name, final String idType, final String id, final String type, final String tel) {
             new Thread(){
@@ -246,12 +249,8 @@ public class MyContact extends Activity {
                                 .post(requestBody)
                                 .build();
 
-                        Log.d(TAG, "request: "+request);
                         Response response = client.newCall(request).execute();
-                        Log.d(TAG, "response: "+response);
                         String responseData = response.body().string();
-                        Log.d(TAG, "responseData: "+responseData);
-
                         msg.what = 3;
 
                     } catch (IOException e) {
