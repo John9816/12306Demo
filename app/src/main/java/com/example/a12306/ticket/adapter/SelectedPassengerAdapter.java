@@ -15,8 +15,12 @@ import com.example.a12306.ticket.SelectedPassenger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class SelectedPassengerAdapter extends BaseAdapter {
     private Context context;
     private  ArrayList<Map<String,Object>> data;

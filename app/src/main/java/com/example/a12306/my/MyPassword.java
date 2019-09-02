@@ -14,6 +14,22 @@ import android.widget.Toast;
 
 import com.example.a12306.LoginActivity;
 import com.example.a12306.R;
+import com.example.a12306.utils.CONSTANT;
+
+import java.io.IOException;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //我的密码
 public class MyPassword extends Activity {
     private EditText edtPassword, edtagainPassword;
@@ -41,13 +57,7 @@ public class MyPassword extends Activity {
                 String password = edtPassword.getText().toString().trim();
                 String againpassword = edtagainPassword.getText().toString().trim();
                 if (againpassword.equals(password)) {
-                    SharedPreferences sp = getSharedPreferences("info", MODE_PRIVATE);
-                    SharedPreferences.Editor ed = sp.edit();
-                    ed.putString("password", password);
-                    ed.putBoolean("MODIFYPASSWORD",true);
-                    ed.putBoolean("ISCHECKED",false);
-                    ed.commit();
-                    Log.d(TAG, "onClick: "+password);
+                   Update(againpassword);
                     Intent intent = new Intent(MyPassword.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -57,6 +67,35 @@ public class MyPassword extends Activity {
             }
         });
     }
+
+    private void Update(final String newPassword) {
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                SharedPreferences preferences = MyPassword.this.getSharedPreferences("userinfo", MODE_PRIVATE);
+                String value = preferences.getString("cookie", "");
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("newPassword",newPassword)
+                            .add("action","update")
+                            .build();
+                    Request request = new Request.Builder()
+                            .addHeader("Cookie",value)
+                            .url(CONSTANT.HOST + "/otn/AccountPassword")
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    Log.d(TAG, "run: "+responseData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
     //ActionBar重写的方法
     @Override
     public boolean onOptionsItemSelected(   MenuItem item) {

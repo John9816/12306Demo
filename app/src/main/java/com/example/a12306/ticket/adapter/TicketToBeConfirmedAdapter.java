@@ -12,7 +12,12 @@ import com.example.a12306.ticket.TicketToBeConfirmed;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class TicketToBeConfirmedAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<HashMap<String,Object>> data;

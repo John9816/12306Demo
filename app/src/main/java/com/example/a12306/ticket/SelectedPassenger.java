@@ -40,26 +40,26 @@ public class SelectedPassenger extends AppCompatActivity {
         toolbar = CONST.usrToolbar(R.id.selectedhead, "", this, 0);
         lv_passengerlist = findViewById(R.id.lv_passengerlist);
         btn_addPassenger = findViewById(R.id.btn_addPassenger);
-        if (CONST.passenger_informationt.size()<=0) {
+        if (CONST.passenger_info.size()<=0) {
             Map<String, Object> map1 = new HashMap<String, Object>();
             map1.put("idCard", "身份证:123");
             map1.put("name", "张三(成人)");
             map1.put("tel", "电话:1234");
-            CONST.passenger_informationt.add(map1);
+            CONST.passenger_info.add(map1);
 
             Map<String, Object> map2 = new HashMap<String, Object>();
             map2.put("name", "李四(成人)");
             map2.put("idCard", "身份证:12345");
             map2.put("tel", "电话:123456");
-            CONST.passenger_informationt.add(map2);
+            CONST.passenger_info.add(map2);
 
             Map<String, Object> map3 = new HashMap<String, Object>();
             map3.put("name", "王二(学生)");
             map3.put("idCard", "学生证:1234567");
             map3.put("tel", "电话:12345678");
-            CONST.passenger_informationt.add(map3);
+            CONST.passenger_info.add(map3);
         }
-        SelectedPassengerAdapter adapter = new SelectedPassengerAdapter(this, CONST.passenger_informationt);
+        SelectedPassengerAdapter adapter = new SelectedPassengerAdapter(this, CONST.passenger_info);
         lv_passengerlist.setAdapter(adapter);
         btn_addPassenger.setOnClickListener(new View.OnClickListener() {
             @Override

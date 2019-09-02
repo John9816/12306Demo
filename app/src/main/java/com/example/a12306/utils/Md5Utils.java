@@ -12,6 +12,7 @@ public class Md5Utils {
                 'a', 'b', 'c', 'd', 'e', 'f' };
 
         try {
+            //获取需要加密字段的字节
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象
             MessageDigest mdInst = MessageDigest.getInstance("MD5");

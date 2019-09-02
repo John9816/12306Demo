@@ -102,6 +102,12 @@ public class LoginActivity extends AppCompatActivity{
         edtUsername = (EditText)findViewById(R.id.edtUsername);
         edtPassword = (EditText)findViewById(R.id.edtPassword);
         tvLostPassword = (TextView)findViewById(R.id.tvLostPassword);
+        tvLostPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this,"暂未开发",Toast.LENGTH_SHORT).show();
+            }
+        });
         btnLogin = (Button)findViewById(R.id.btnLogin);
         ckLogin = (CheckBox)findViewById(R.id.ckLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -192,10 +198,10 @@ public class LoginActivity extends AppCompatActivity{
                 }
             }
         });
-        String url = "<a href='http://www.12306.cn'>忘记密码？</a>";
+       /* String url = "<a href='http://www.12306.cn'>忘记密码？</a>";
         CharSequence charSequence = Html.fromHtml(url);
         tvLostPassword.setText(charSequence);
-        tvLostPassword.setMovementMethod(LinkMovementMethod.getInstance());
+        tvLostPassword.setMovementMethod(LinkMovementMethod.getInstance());*/
 
     }
 

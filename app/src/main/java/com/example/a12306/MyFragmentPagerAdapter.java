@@ -7,7 +7,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.example.a12306.my.MyFragment;
 import com.example.a12306.order.OrderFragment;
 import com.example.a12306.ticket.TicketFragment;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private final int PAGE_COUNT = 3;
     private TicketFragment ticketFragment;

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
         <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -36,6 +36,14 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 是否使用背景半透明 -->
+    </style>
+
+    //checkbox选中特性
+    <style name="cb_test">
+        <!--波纹的颜色-->
+        <item name="android:colorControlHighlight" tools:targetApi="lollipop">@color/colorPrimary</item>
+        <!--选中的颜色-->
+        <item name="colorAccent">@color/colorNoSelect</item>
     </style>
 
 </resources>

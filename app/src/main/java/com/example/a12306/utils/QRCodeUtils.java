@@ -13,7 +13,12 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.Hashtable;
 
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class QRCodeUtils {
     private Bitmap qrcode_bitmap;//生成的二维码
     private int codecolor = Color.BLACK;
@@ -23,8 +28,6 @@ public class QRCodeUtils {
 
 
     public void generateQrcodeAndDisplay(String content, ImageView iv_qrcode){
-
-
 
        qrcode_bitmap = QRCodeUtils.createQRCodeBitmap(content, 650, 650,
                "UTF-8", margin, codecolor, bagcolor, 0.2F, blackBitmap);

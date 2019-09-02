@@ -3,7 +3,12 @@ package com.example.a12306.others;
 import android.util.Log;
 
 import java.util.ArrayList;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 public class QueryTestData {
     private static final String TAG = "QueryTestData";
     //列车车次

@@ -8,7 +8,12 @@ import com.example.a12306.order.OrderFragment;
 import com.example.a12306.order.UnPayFragment;
 
 import java.util.List;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //订单页面适配器
 public class PageAdapter extends FragmentPagerAdapter {
     private UnPayFragment unPayFragment;

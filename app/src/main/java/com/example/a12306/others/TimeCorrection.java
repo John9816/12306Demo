@@ -6,7 +6,12 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //时间校正
 public class TimeCorrection {
     private int year,month,day;

@@ -14,7 +14,12 @@ import com.example.a12306.others.QueryTestData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+/**
+ * author : wingel
+ * e-mail : 1255542159@qq.com
+ * desc   :
+ * version: 1.0
+ */
 //查询结果适配器
 public class QueryResultAdapter extends BaseAdapter {
 

@@ -25,7 +25,11 @@ import com.example.a12306.LoginActivity;
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
 import com.example.a12306.utils.CONSTANT;
+import com.example.a12306.utils.Md5Utils;
 import com.example.a12306.utils.NetUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,8 +37,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -54,7 +60,8 @@ public class MyFragment extends Fragment {
     private AlertDialog.Builder builder;
     private ProgressDialog progressDialog = null;
     private static final String TAG = "MyFragment";
-
+    private  OkHttpClient client = new OkHttpClient();
+    private SharedPreferences preferences;
     private int Images[] = {R.drawable.mycontact,R.drawable.mycontact,R.drawable.mycontact};
 
     @Override
@@ -66,6 +73,7 @@ public class MyFragment extends Fragment {
     }
 
     private void initView() {
+
         btn_esc = (Button)view.findViewById(R.id.btn_esc);
         btn_esc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,10 +116,11 @@ public class MyFragment extends Fragment {
                         break;
                     case 2:
                         //我的密码
+
                         builder=new AlertDialog.Builder(getActivity());
                         view= LayoutInflater.from(getActivity()).inflate(R.layout.activity_password_dialog,null,false);
                         modifypw=view.findViewById(R.id.et_common);
-                        builder.setTitle("请输入你的密码");
+                        builder.setTitle("请输入原密码");
                         MyFragment.this.builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -122,16 +131,9 @@ public class MyFragment extends Fragment {
                         MyFragment.this.builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                SharedPreferences sp=getActivity().getSharedPreferences("info",MODE_PRIVATE);
                                 String inputpasswors = modifypw.getText().toString().trim();
-                                String matepasswor=sp.getString("password","");
-                                if (inputpasswors.equals(matepasswor)){
-                                    alertDialog.dismiss();
-                                    Intent intent2 = new Intent(getActivity(),MyPassword.class);
-                                    startActivity(intent2);
-                                }else {
-                                    Toast.makeText(getActivity(),"密码错误请重新输入",Toast.LENGTH_SHORT).show();
-                                }
+                                QueryPassword(inputpasswors);
+
                             }
                         });
                         alertDialog= MyFragment.this.builder.create();
@@ -142,13 +144,52 @@ public class MyFragment extends Fragment {
 
                 }
             }
-        });
+
+
+       });
 
 }
 
-//执行异步任务退出登陆
+    private void QueryPassword(final String oldPassword) {
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                preferences = getActivity().getSharedPreferences("userinfo", MODE_PRIVATE);
+                String value = preferences.getString("cookie", "");
+                try{
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("oldPassword",oldPassword)
+                            .add("action","query")
+                            .build();
+
+                    Request request = new Request.Builder()
+                            .addHeader("Cookie",value)
+                            .url(CONSTANT.HOST + "/otn/AccountPassword")
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    Log.d(TAG, "response: "+response);
+                    String responseData = response.body().string();
+                    Log.d(TAG, "responseData: "+responseData);
+
+                                if ("\"1\"".equals(responseData)){
+                                    alertDialog.dismiss();
+                                    Intent intent2 = new Intent(getActivity(),MyPassword.class);
+                                    startActivity(intent2);
+                                }else {
+                                    Toast.makeText(getActivity(),"原密码错误请重新输入",Toast.LENGTH_SHORT).show();
+                                }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    //执行异步任务退出登陆
    class LogoutTask extends AsyncTask<String,String,String> {
-    SharedPreferences preferences = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+
     @Override
     protected void onPreExecute() {
         progressDialog = ProgressDialog.show(getActivity(),null,"正在加载中......",false,true);
@@ -158,13 +199,9 @@ public class MyFragment extends Fragment {
     @Override
     protected String doInBackground(String... params) {
         String result = null;
-        //读取已经存好的sessionId
-
-        String value = preferences.getString("cookie", "");
-        Log.d(TAG, "doInBackground: 读取的sessionId：" + value);
-
         try {
-            OkHttpClient client = new OkHttpClient();
+            preferences = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+            String value = preferences.getString("cookie", "");
             Request request = new Request.Builder()
                     .addHeader("Cookie", value)
                     .url(CONSTANT.HOST + "/otn/Logout")
@@ -208,5 +245,7 @@ public class MyFragment extends Fragment {
 
     }
 }
+
+
 }
 

@@ -3,6 +3,8 @@ package com.example.a12306.my;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,12 +19,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
 import com.example.a12306.R;
+import com.example.a12306.others.CONST;
+import com.example.a12306.utils.CONSTANT;
+import com.example.a12306.utils.NetUtils;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static com.example.a12306.others.CONST.passenger;
 /**
@@ -35,7 +50,6 @@ import static com.example.a12306.others.CONST.passenger;
 public class MyContactEdit extends Activity {
 
     private ListView lvMyContactEdit;
-    private List<Map<String,Object>> data;
     private SimpleAdapter adapter;
     private Button btn_contactsave;//保存按钮
     private AlertDialog alertDialog;//对话框
@@ -45,6 +59,10 @@ public class MyContactEdit extends Activity {
     private String inputname,inputtel;
     private  Map<String,Object> map1,map2,map3,map4,map5;
     private static final String TAG = "MyContactEdit";
+    private ProgressDialog pDialog;
+    private String action = "";
+    private OkHttpClient client = new OkHttpClient();
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +101,7 @@ public class MyContactEdit extends Activity {
                                 SharedPreferences sp=getSharedPreferences("info",MODE_PRIVATE);
                                 inputname = modifynm .getText().toString().trim();
                                // String matepasswor=sp.getString("password","");
-                                data.get(position).put("key2",inputname);
+                                CONST.passenger_info.get(position).put("key2",inputname);
                                 adapter.notifyDataSetChanged();
 
                             }
@@ -104,13 +122,13 @@ public class MyContactEdit extends Activity {
                                     //如果选择0--成人
                                     Log.d(TAG, "position: "+position);
                                     Log.d(TAG, "which: "+which);
-                                    map4.put("key2",passenger[0]);
+                                    CONST.passenger_info.get(position).put("key2",passenger[0]);
                                 }
                                 if (which == 1) {
                                     //如果选择1--学生
                                     Log.d(TAG, "position1: "+position);
                                     Log.d(TAG, "which1: "+which);
-                                    map4.put("key2",passenger[1]);
+                                    CONST.passenger_info.get(position).put("key2",passenger[1]);
                                 }
 
                             }
@@ -118,7 +136,7 @@ public class MyContactEdit extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent();
-                                intent.putExtra("row", (Serializable) data.get(position));
+                                intent.putExtra("row", (Serializable) CONST.passenger_info.get(position));
                                 adapter.notifyDataSetChanged();
                             }
                         });
@@ -142,7 +160,7 @@ public class MyContactEdit extends Activity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 inputtel = modifynm .getText().toString().trim();
                                 // String matepasswor=sp.getString("password","");
-                                map5.put("key2",inputtel);
+                                CONST.passenger_info.get(position).put("key2",inputtel);
                                 adapter.notifyDataSetChanged();
 
                             }
@@ -159,71 +177,99 @@ public class MyContactEdit extends Activity {
             @Override
             public void onClick(View v) {
 
-                //获取姓名
-                String name =  map1.get("key2").toString();
-                Log.d(TAG, "onClick: "+name);
-                //获取性别
-                String type = map4.get("key2").toString();
-                //获取电话号码
-                String telephone = map5.get("key2").toString();
-                String append = name+"("+type+")";
-                //存入本地
-                SharedPreferences sharedPreferences = getSharedPreferences("mycontact",MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("append",append);
-                editor.putString("tel",telephone);
-                editor.commit();
+                //1、检查网络连接是否正常
+                if (!NetUtils.check(MyContactEdit.this)) {
+                    Toast.makeText(MyContactEdit.this, "网络异常，请检查！", Toast.LENGTH_LONG).show();
+                    return;//后续代码不执行
+                }
+              pDialog = ProgressDialog.show(MyContactEdit.this,null,"正在加载中...",
+                        false,true);
+                action = "update";
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                preferences = MyContactEdit.this.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+                String value = preferences.getString("cookie", "");
+                String id = CONST.passenger_info.get(2).get("key2").toString();
+                String name = CONST.passenger_info.get(0).get("key2").toString();
+                String idType = CONST.passenger_info.get(1).get("key2").toString();
+                String tel =CONST.passenger_info.get(4).get("key2").toString();
+                String type = CONST.passenger_info.get(3).get("key2").toString();
+                try{
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("姓名", name)
+                            .add("证件类型", idType)
+                            .add("证件号码",id)
+                            .add("乘客类型",type)
+                            .add("电话",tel)
+                            .add("action",action)
+                            .build();
 
-                Intent intent = new Intent(MyContactEdit.this,MyContact.class);
-                intent.putExtra("telephone",telephone);
-                intent.putExtra("name",name);
-                intent.putExtra("type",type);
-                setResult(RESULT_OK,intent);
+                    Request request = new Request.Builder()
+                            .addHeader("cookie",value)
+                            .url(CONSTANT.HOST + "/otn/Passenger")
+                            .post(requestBody)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    Log.d(TAG, "responseData: "+responseData);
+                    if("\"1\"".equals(responseData)){
+                        if(pDialog != null){
+                            pDialog.dismiss();
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }.start();
+                MyContact.adapter.notifyDataSetChanged();
                 finish();
             }
         });
-
-
     }
+
 
     //数据初始化
     private void initData() {
         Map<String,Object> contact = (HashMap<String, Object>) getIntent().getSerializableExtra("row");
-        data = new ArrayList<>();
+        CONST.passenger_info = new ArrayList<>();
         map1 = new HashMap<>();
         String name = (String) contact.get("name");
         map1.put("key1","姓名");
         //split拆分法，以括号拆分
         map1.put("key2",name.split("\\(")[0]);
         map1.put("key3",R.drawable.forward_25);
-        data.add(map1);
+        CONST.passenger_info.add(map1);
 
         map2 = new HashMap<>();
         String idCard = (String) contact.get("idCard");
         map2.put("key1","证件类型");
         map2.put("key2",idCard.split("\\:")[0]);
-        data.add(map2);
+        CONST.passenger_info.add(map2);
 
         map3 = new HashMap<>();
         map3.put("key1","证件号码");
         map3.put("key2",idCard.split("\\:")[1]);
-        data.add(map3);
+        CONST.passenger_info.add(map3);
 
         map4 = new HashMap<>();
         map4.put("key1","乘客类型");
         map4.put("key2",name.split("\\(")[1].replace(")",""));
         map4.put("key3",R.drawable.forward_25);
-        data.add(map4);
+        CONST.passenger_info.add(map4);
 
         map5 = new HashMap<>();
         String tel = (String) contact.get("tel");
         map5.put("key1","电话");
         map5.put("key2",tel.split("\\:")[1]);
         map5.put("key3",R.drawable.forward_25);
-        data.add(map5);
+        CONST.passenger_info.add(map5);
 
         adapter = new SimpleAdapter(this,
-                data,
+                CONST.passenger_info,
                 R.layout.list_item_my_contact_edit_layout,
                 new String[]{"key1","key2","key3"},
                 new int[]{R.id.tv_MyContact_edit_key,R.id.tv_MyContact_edit_value,R.id.img_MyContact_edit_flag});
