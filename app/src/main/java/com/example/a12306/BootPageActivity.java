@@ -104,7 +104,11 @@ public class BootPageActivity extends AppCompatActivity implements View.OnClickL
 
         final String username = preferences.getString("username","");
         final String password = preferences.getString("password","");
-
+        //1、检查网络连接是否正常
+        if (!NetUtils.check(BootPageActivity.this)) {
+            Toast.makeText(BootPageActivity.this, "网络异常，请检查！", Toast.LENGTH_LONG).show();
+            return;//后续代码不执行
+        }
         new Thread(){
             @Override
             public void run() {

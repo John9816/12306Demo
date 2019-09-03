@@ -61,7 +61,6 @@ public class MyFragment extends Fragment {
     private ProgressDialog progressDialog = null;
     private static final String TAG = "MyFragment";
     private  OkHttpClient client = new OkHttpClient();
-    private SharedPreferences preferences;
     private int Images[] = {R.drawable.mycontact,R.drawable.mycontact,R.drawable.mycontact};
 
     @Override
@@ -155,8 +154,6 @@ public class MyFragment extends Fragment {
             @Override
             public void run() {
                 super.run();
-                preferences = getActivity().getSharedPreferences("userinfo", MODE_PRIVATE);
-                String value = preferences.getString("cookie", "");
                 try{
                     RequestBody requestBody = new FormBody.Builder()
                             .add("oldPassword",oldPassword)
@@ -164,7 +161,7 @@ public class MyFragment extends Fragment {
                             .build();
 
                     Request request = new Request.Builder()
-                            .addHeader("Cookie",value)
+                            .addHeader("Cookie",CONST.getCookie(getActivity()))
                             .url(CONSTANT.HOST + "/otn/AccountPassword")
                             .post(requestBody)
                             .build();
@@ -200,10 +197,9 @@ public class MyFragment extends Fragment {
     protected String doInBackground(String... params) {
         String result = null;
         try {
-            preferences = getActivity().getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-            String value = preferences.getString("cookie", "");
+
             Request request = new Request.Builder()
-                    .addHeader("Cookie", value)
+                    .addHeader("Cookie", CONST.getCookie(getActivity()))
                     .url(CONSTANT.HOST + "/otn/Logout")
                     .build();
             Response response = client.newCall(request).execute();
@@ -224,6 +220,7 @@ public class MyFragment extends Fragment {
             progressDialog.dismiss();
 
         if ("\"1\"".equals(result)) {
+            SharedPreferences preferences = getActivity().getSharedPreferences("userinfo",MODE_PRIVATE);
             Toast.makeText(getActivity(), "退出成功", Toast.LENGTH_SHORT)
                     .show();
             preferences.edit().clear().commit();

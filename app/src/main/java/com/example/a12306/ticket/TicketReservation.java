@@ -12,13 +12,27 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
+import com.example.a12306.others.Contact;
 import com.example.a12306.others.QueryTestData;
 import com.example.a12306.others.TimeCorrection;
 import com.example.a12306.ticket.adapter.QueryResultAdapter;
+import com.example.a12306.utils.CONSTANT;
 import com.gyf.immersionbar.ImmersionBar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * author : wingel
@@ -33,13 +47,13 @@ public class TicketReservation extends AppCompatActivity implements View.OnClick
     private Button last_day, next_day;
     private ListView result_list;
     private int year, month, day;
-    private String startPlace,stopPlace;
+    private String startPlace,stopPlace,startTrainDate;
     private Calendar calendar;
     private TimeCorrection timeCorrection;
     private ArrayList<HashMap<String, Object>> test_data;
     private HashMap<String, Object> content_data;
     public static TicketReservation ticketReservation;
-    private static final String TAG = "TicketReservation1";
+    private static final String TAG = "TicketReservation";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +83,6 @@ public class TicketReservation extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.last_day:
                 timeCorrection.lastDay();
@@ -89,8 +102,47 @@ public class TicketReservation extends AppCompatActivity implements View.OnClick
         day = bundle.getInt("Day",calendar.get(Calendar.DAY_OF_MONTH));
         startPlace = bundle.getString("startPlace");
         stopPlace = bundle.getString("stopPlace");
+        startTrainDate = year + "-" + month + "-" + day;
 
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("fromStationName",startPlace)
+                            .add("toStationName",stopPlace)
+                            .add("startTrainDate",startTrainDate)
+                            .build();
+                    Request request = new Request.Builder()
+                            .addHeader("cookie",CONST.getCookie(getApplication()))
+                            .url(CONSTANT.HOST + "/otn/TrainList")
+                            .post(requestBody)
+                            .build();
+                    Log.d(TAG, "request: "+request);
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+                    Log.d(TAG, "responseDate: "+responseData);
+                    JSONArray jsonArray = new JSONArray(responseData);
+                    JSONObject jsonObject;
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        jsonObject = jsonArray.getJSONObject(i);
+                        Log.d(TAG, "run: "+jsonObject.getString("trainNo"));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
+
+
+
+
 
     private void addInquiryResult(ListView listView) {
         test_data = new ArrayList<>();
@@ -125,4 +177,6 @@ public class TicketReservation extends AppCompatActivity implements View.OnClick
         intent.putExtras(bundle);
         startActivity(intent);
     }
+
+
 }

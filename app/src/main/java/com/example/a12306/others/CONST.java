@@ -1,13 +1,22 @@
 package com.example.a12306.others;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import com.example.a12306.R;
+import com.example.a12306.my.MyFragment;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.Cookie;
+
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * author : wingel
  * e-mail : 1255542159@qq.com
@@ -22,7 +31,7 @@ public final class CONST {
     public static final String[] idType = {"身份证","军人证","港澳通行证"};
     public static final String[] mydatas ={ "我的联系人", "我的账户", "我的密码" };
     public static final int[]  images= {R.drawable.forward_25,R.drawable.forward_25};
-    public static final String[] cities = {"北京", "上海", "天津", "重庆", "哈尔滨",  "长春", "沈阳"
+    public static final String[] cities = {"北京","大连" ,"上海", "天津", "重庆", "哈尔滨",  "长春", "沈阳"
             ,"呼和浩特", "石家庄", "乌鲁木齐", "兰州", "西宁", "西安", "银川", "郑州", "济南", "太原", "合肥", "武汉", "长沙"
             , "南京", "成都", "贵阳", "昆明", "南宁", "拉萨", "杭州", "南宁", "广州", "福州", "台北", "海口","香港", "澳门"};
     public static ArrayList<String>  query_history=
@@ -49,5 +58,13 @@ public final class CONST {
             }
         });
         return toolbar;
+    }
+
+
+    public static  String getCookie(Context context){
+        SharedPreferences preferences = context.getSharedPreferences("userinfo", MODE_PRIVATE);
+        String value = preferences.getString("cookie", "");
+        return value;
+
     }
 }

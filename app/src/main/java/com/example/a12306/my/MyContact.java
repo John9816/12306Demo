@@ -185,11 +185,10 @@ public class MyContact extends Activity {
             @Override
             public void run() {
                 Message msg = handler.obtainMessage();
-                SharedPreferences preferences = MyContact.this.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-                String value = preferences.getString("cookie","");
+
                 try {
                     Request request = new Request.Builder()
-                            .addHeader("Cookie",value)
+                            .addHeader("Cookie",CONST.getCookie(getApplication()))
                             .url(CONSTANT.HOST + "/otn/PassengerList")
                             .build();
                     Log.d(TAG, "request: "+request);

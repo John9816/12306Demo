@@ -309,9 +309,7 @@ public class AddNewContact extends Activity {
                     final String tel = CONST.passenger_info.get(4).get("key2").toString();
 
                     try {
-                        //读取已经存好的sessionId
-                        SharedPreferences preferences = AddNewContact.this.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
-                        String value = preferences.getString("cookie", "");
+
                         OkHttpClient client = new OkHttpClient();
                         RequestBody requestBody = new FormBody.Builder()
                                 .add("姓名",name)
@@ -323,7 +321,7 @@ public class AddNewContact extends Activity {
                                 .build();
 
                         Request request = new Request.Builder()
-                                .addHeader("Cookie",value)
+                                .addHeader("Cookie",CONST.getCookie(getApplication()))
                                 .url(CONSTANT.HOST + "/otn/Passenger")
                                 .post(requestBody)
                                 .build();

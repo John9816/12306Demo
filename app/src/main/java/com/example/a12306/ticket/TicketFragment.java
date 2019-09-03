@@ -2,8 +2,12 @@ package com.example.a12306.ticket;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.a12306.MainActivity;
 import com.example.a12306.R;
+import com.example.a12306.db.QueryHistoryDBOpenHelper;
 import com.example.a12306.others.CONST;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -49,6 +54,8 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
     private Calendar calendar;
     private int Year,Month,Day;
     private String stationFrom,stationTo;
+    private SQLiteDatabase db;
+    private QueryHistoryDBOpenHelper queryHistoryDBOpenHelper;
     public TicketFragment(){
 
     }
@@ -64,7 +71,10 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
 
     //控件初始化
     private void initView() {
+
         ImmersionBar.with(this).init();
+        queryHistoryDBOpenHelper = new QueryHistoryDBOpenHelper(getActivity(),
+                "history.db",null,1);
         calendar = Calendar.getInstance();
         tvTicketStationFrom = (TextView)view.findViewById(R.id.tvTicketStationFrom);
         tvTicketStationFrom.setOnClickListener(this);
@@ -79,9 +89,7 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
         btnTicketQuery = (Button)view.findViewById(R.id.btnTicketQuery);
         btnTicketQuery.setOnClickListener(this);
         lv_query_history = (ListView)view.findViewById(R.id.lv_query_history);
-        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_expandable_list_item_1,
-                CONST.query_history);
-        lv_query_history.setAdapter(adapter);
+
     }
 
     //全局按钮事件的监听
@@ -162,9 +170,8 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 break;
                 //查询历史
             case R.id.btnTicketQuery:
-            CONST.query_history.add(tvTicketStationFrom.getText().toString() + "------------------" +
-                    "-----" + tvTicketStationTo.getText().toString());
-            adapter.notifyDataSetChanged();//列表刷新
+                insert(tvTicketStationFrom.getText().toString(),tvTicketStationTo.getText().toString());
+                searchDataBase(queryHistoryDBOpenHelper.getReadableDatabase());
                 Intent intent = new Intent(getActivity(),TicketReservation.class);
                 if(Year == 0 || Month == 0|| Day == 0){
                     Year = calendar.get(Calendar.YEAR);
@@ -175,8 +182,7 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 bundle.putInt("Year",Year);
                 bundle.putInt("Month",Month);
                 bundle.putInt("Day",Day);
-                bundle.putString("startPlace",
-                        tvTicketStationFrom.getText().toString() );
+                bundle.putString("startPlace", tvTicketStationFrom.getText().toString() );
                 bundle.putString("stopPlace",tvTicketStationTo.getText().toString());
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -185,6 +191,42 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
         }
 
     }
+
+    //插入数据
+    private void insert(String stationFrom, String stationTo) {
+        db = queryHistoryDBOpenHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+                         contentValues.put("stationfrom", stationFrom);
+                         contentValues.put("stationto", stationTo);
+        Log.d(TAG, "insert: "+stationTo);
+        Log.d(TAG, "insert: "+stationFrom);
+                         //插入数据：getWritableDatabase，当执行getWritableDatabase时数据库才被创建
+                        SQLiteDatabase db = queryHistoryDBOpenHelper.getWritableDatabase();
+                        long id = db.insert("historytable", null, contentValues);
+                       db.close();
+                      if (id != -1) Toast.makeText(getActivity(), "插入成功", Toast.LENGTH_SHORT).show();
+                         else Toast.makeText(getActivity(), "插入失败", Toast.LENGTH_SHORT).show();
+    }
+
+    //查询数据
+    private void searchDataBase(SQLiteDatabase db) {
+        Cursor cursor=db.query("historytable", new String[]{"stationfrom","stationto"},
+                null, null, null, null, null);
+            String stationfrom = "";
+            String stationto = "";
+               for (cursor.moveToFirst();!cursor.isAfterLast();cursor.moveToNext()) {
+                   stationfrom = cursor.getString(0);
+                   stationto = cursor.getString(1);
+                  }
+                cursor.close();
+                db.close();
+                 CONST.query_history.add(stationfrom + "-" +stationto);
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_expandable_list_item_1,
+                CONST.query_history);
+        lv_query_history.setAdapter(adapter);
+            }
+
+
 
     //选择城市列表
     private void SelectCityList(final  TextView tv_place) {

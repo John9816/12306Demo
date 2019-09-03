@@ -76,13 +76,8 @@ public class QueryResultAdapter extends BaseAdapter {
             string.append(tickets.get(position)[i]);
         }
         resultHolder.gridLayout.setText(string.toString());
-//        for (String s : tickets.get(position)) {
-//            TextView textView = new TextView(context);
-//            textView.setText(s);
-////            resultHolder.gridLayout.addView(textView);
-//        }
 
-        Log.d(TAG, "getView: "+QueryTestData.addData().toString());
+
         return convertView;
     }
 }
