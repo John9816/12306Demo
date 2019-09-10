@@ -4,71 +4,69 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@+id/vpager"
-        android:background="#020000"/>
 
-        <RadioGroup
+    <RadioGroup
         android:id="@+id/rg_tab_bar"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rb_ticket"
-                android:text="订票"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                style="@style/tab_menu_item"
-                android:background="@drawable/selector"
-                android:layout_weight="1" />
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#020000" />
-
-            <RadioButton
-                android:id="@+id/rb_order"
-                android:text="订单"
-                style="@style/tab_menu_item"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"/>
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#020000" />
-
-            <RadioButton
-                android:id="@+id/rb_my"
-                android:text="我的"
-                style="@style/tab_menu_item"
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/selector"/>
-
-
-        </RadioGroup>
-
-        <View
-            android:id="@+id/div_tab_bar"
-            android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:layout_above="@id/rg_tab_bar"
-            android:background="#fff" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vpager"
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/rb_ticket"
+            android:text="订票"
             android:layout_height="match_parent"
-            android:layout_above="@id/div_tab_bar"
+            android:layout_width="0dp"
+            style="@style/tab_menu_item"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/table_menu"
+            android:drawablePadding="5dp"
+            android:paddingTop="5dp"/>
 
-            />
 
-    </RelativeLayout>
+        <RadioButton
+            android:id="@+id/rb_order"
+            style="@style/tab_menu_item"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/table_menu_order"
+            android:drawablePadding="5dp"
+            android:paddingTop="5dp"
+            android:text="订单" />
+
+
+
+        <RadioButton
+            android:id="@+id/rb_my"
+            android:text="我的"
+            style="@style/tab_menu_item"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/table_menu_my"
+            android:drawablePadding="5dp"
+            android:paddingTop="5dp"/>
+
+
+    </RadioGroup>
+
+    <View
+        android:id="@+id/div_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_above="@id/rg_tab_bar"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/div_tab_bar"
+
+        />
+
+</RelativeLayout>

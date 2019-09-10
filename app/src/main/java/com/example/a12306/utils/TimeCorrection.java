@@ -1,8 +1,11 @@
-package com.example.a12306.others;
+package com.example.a12306.utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.JsonArray;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +22,7 @@ public class TimeCorrection {
     private TextView textView;
     private Calendar currentCalendar,calendar;
     private final String[] sumweek = new String[]{"周日", "周一", "周二", "周三", "周四", "周五", "周六"};
+    private static final String TAG = "TimeCorrection";
 
     public TimeCorrection(Context context, TextView textView, Calendar currentCalendar, int year, int month, int day){
         this.context = context;
@@ -30,12 +34,8 @@ public class TimeCorrection {
         calendar = Calendar.getInstance();
     }
     //上一天
-    public void lastDay() {
+    public String lastDay() {
         day--;
-        if(day <currentCalendar.get(Calendar.DAY_OF_MONTH)&& month == (currentCalendar.get(Calendar.MONTH)+1)) {
-            day++;
-            Toast.makeText(context, "日期无效，不能为当前日期的前一天", Toast.LENGTH_SHORT).show();
-        } else {
             if (day < calendar.getActualMinimum(Calendar.DAY_OF_MONTH)) {
                 month--;
                 modifyCalendar(year, month);
@@ -43,11 +43,12 @@ public class TimeCorrection {
             }
             textView.setText(year + "-" + month + "-" + day + "（" + getCurrentWeek(year,
                     month, day) + "）");
-        }
+
+            return year + "-" + month + "-" + day;
     }
 
     //下一天
-    public void nextDay(){
+    public String nextDay(){
         day++;
         if (day > calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) {
             month++;
@@ -56,6 +57,8 @@ public class TimeCorrection {
         }
         textView.setText(year + "-" + month + "-" + day + "（" + getCurrentWeek(year,
                 month, day) + "）");
+
+        return year + "-" + month + "-" + day;
     }
 
     //获取当前周

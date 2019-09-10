@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@color/colorSelect"/>//选中时颜色
+    <item android:state_checked="true" android:drawable="@color/text_blue"/>//选中时颜色
     <item android:state_checked="false" android:drawable="@color/colorNoSelect"/>//未选中时颜色
-    <item android:drawable="@color/colorNoSelect"/>//默认颜色
 </selector>

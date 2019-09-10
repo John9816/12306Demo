@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-        <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
@@ -17,12 +17,12 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">3dp</item>
-        <item name="android:background"> #000000 </item>
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@drawable/table_menu_text</item>
     </style>
     //自定义对话框样式
     <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#FFFFFF</item>
 
     </style>
 

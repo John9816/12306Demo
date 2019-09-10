@@ -3,7 +3,6 @@ package com.example.a12306.ticket;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,8 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
@@ -27,16 +26,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.a12306.MainActivity;
 import com.example.a12306.R;
 import com.example.a12306.db.QueryHistoryDBOpenHelper;
 import com.example.a12306.others.CONST;
 import com.gyf.immersionbar.ImmersionBar;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import static android.content.ContentValues.TAG;
 /**
  * author : wingel
  * e-mail : 1255542159@qq.com
@@ -105,32 +101,17 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 SelectCityList(tvTicketStationTo);
                 break;
                 //图片切换出发地和目的地
+            //图片切换出发地和目的地
             case R.id.imgTicketExchange:
                 stationFrom = tvTicketStationFrom.getText().toString();
                 stationTo = tvTicketStationTo.getText().toString();
-                TranslateAnimation animationFrom = new TranslateAnimation(0, 650, 0, 0);
-                TranslateAnimation animationTo = new TranslateAnimation(0, 650, 0, 0);
-                animationFrom.setDuration(300);
-                animationFrom.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        tvTicketStationFrom.setText(stationTo);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                });
-
-                animationFrom.setDuration(300);
-                animationFrom.setInterpolator(new AccelerateDecelerateInterpolator());
-                animationFrom.setAnimationListener(new Animation.AnimationListener() {
+                TranslateAnimation anileft = new TranslateAnimation(0,450,0,0);
+                TranslateAnimation aniright = new TranslateAnimation(0,-450,0,0);
+                anileft.setInterpolator(new AccelerateInterpolator());
+                aniright.setInterpolator(new AccelerateInterpolator());
+                anileft.setDuration(500);
+                aniright.setDuration(500);
+                anileft.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
 
@@ -139,6 +120,23 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         tvTicketStationTo.setText(stationFrom);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+                aniright.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+
                         tvTicketStationFrom.setText(stationTo);
                     }
 
@@ -147,11 +145,12 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
 
                     }
                 });
-                tvTicketStationTo.startAnimation(animationTo);
-                tvTicketStationFrom.startAnimation(animationFrom);
+                tvTicketStationFrom.startAnimation(anileft);
+                tvTicketStationTo.startAnimation(aniright);
 
                 break;
-                //查询时间选择
+
+            //查询时间选择
             case R.id.tvTicketDateFrom:
                 DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -187,10 +186,11 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
-
         }
 
     }
+
+
 
     //插入数据
     private void insert(String stationFrom, String stationTo) {
@@ -225,8 +225,6 @@ public class TicketFragment extends Fragment implements View.OnClickListener{
                 CONST.query_history);
         lv_query_history.setAdapter(adapter);
             }
-
-
 
     //选择城市列表
     private void SelectCityList(final  TextView tv_place) {

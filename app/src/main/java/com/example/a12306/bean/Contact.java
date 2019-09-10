@@ -1,4 +1,4 @@
-package com.example.a12306.others;
+package com.example.a12306.bean;
 
 import java.util.Collection;
 import java.util.Map;

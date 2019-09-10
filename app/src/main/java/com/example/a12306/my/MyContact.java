@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,11 +23,9 @@ import android.widget.Toast;
 
 import com.example.a12306.R;
 import com.example.a12306.others.CONST;
-import com.example.a12306.others.Contact;
-import com.example.a12306.ticket.AddPassenger;
+import com.example.a12306.bean.Contact;
 import com.example.a12306.utils.CONSTANT;
 import com.example.a12306.utils.NetUtils;
-import com.gyf.immersionbar.ImmersionBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,18 +35,14 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.zip.Inflater;
 
-import okhttp3.Call;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.a12306.ticket.AddPassenger.dispalyselected;
 /**
  * author : wingel
  * e-mail : 1255542159@qq.com

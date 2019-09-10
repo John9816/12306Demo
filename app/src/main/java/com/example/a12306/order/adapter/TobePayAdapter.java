@@ -1,4 +1,4 @@
-package com.example.a12306.ticket.adapter;
+package com.example.a12306.order.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,28 +10,31 @@ import android.widget.TextView;
 
 import com.example.a12306.R;
 import com.example.a12306.bean.TicketNew;
-import com.example.a12306.ticket.TicketToBeConfirmed;
+import com.example.a12306.ticket.adapter.TicketToBeConfirmedAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.example.a12306.others.CONST.trainData;
-
 /**
  * author : wingel
  * e-mail : 1255542159@qq.com
+ * date   : 2019/9/912:29
  * desc   :
  * version: 1.0
  */
-public class TicketToBeConfirmedAdapter extends BaseAdapter {
+public class TobePayAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<HashMap<String,Object>> data;
+    private List<TicketNew.PassengerListBean> data;
+    private String trainNo,trainDate;
     private static final String TAG = "TicketToBeConfirmedAdap";
 
-    public TicketToBeConfirmedAdapter(Context context, ArrayList<HashMap<String,Object>> data){
+    public TobePayAdapter(Context context, List<TicketNew.PassengerListBean> data,String trainNo,String trainDate){
         this.context = context;
         this.data = data;
+        this.trainNo = trainNo;
+        this.trainDate = trainDate;
+
     }
     @Override
     public int getCount() {
@@ -50,25 +53,25 @@ public class TicketToBeConfirmedAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder ToBeConfirm;
+        ViewHolder viewHolder;
         if(convertView == null){
-            ToBeConfirm = new ViewHolder();
+          viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.list_item_ticket_tobeconfirmedadapter,null);
-            ToBeConfirm.name = convertView.findViewById(R.id.name);
-            ToBeConfirm.date = convertView.findViewById(R.id.date);
-            ToBeConfirm.trainNumber = convertView.findViewById(R.id.trainNumber);
-            ToBeConfirm.setNumber = convertView.findViewById(R.id.setNumber);
-            convertView.setTag(ToBeConfirm);
+            viewHolder.name = convertView.findViewById(R.id.name);
+            viewHolder.date = convertView.findViewById(R.id.date);
+            viewHolder.trainNumber = convertView.findViewById(R.id.trainNumber);
+            viewHolder.setNumber = convertView.findViewById(R.id.setNumber);
+            convertView.setTag(viewHolder);
         }else {
-            ToBeConfirm = (ViewHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
+            viewHolder.name.setText(data.get(position).getName());
+            viewHolder.trainNumber.setText(trainNo);
+            viewHolder.date.setText(trainDate);
+            viewHolder.setNumber.setText(data.get(position).getSeat().getSeatNo());
 
 
 
-        ToBeConfirm.name.setText(data.get(position).get("name").toString());
-        ToBeConfirm.trainNumber.setText(trainData[1]);
-        ToBeConfirm.date.setText(trainData[2]);
-        ToBeConfirm.setNumber.setText(data.get(position).get("seatName").toString());
         return convertView;
 
     }
@@ -77,5 +80,6 @@ public class TicketToBeConfirmedAdapter extends BaseAdapter {
         public TextView name, trainNumber, setNumber, date;
     }
 }
+
 
 

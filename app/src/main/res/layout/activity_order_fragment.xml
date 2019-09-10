@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/banner">
 
         <RadioButton
             android:id="@+id/unPaid"
@@ -19,7 +20,6 @@
             android:text="未支付"
             android:textSize="20sp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/selector"
             style="@style/tab_menu_item"
             android:button="@null"
             />
@@ -36,7 +36,6 @@
             android:textSize="20sp"
             style="@style/tab_menu_item"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/selector"
             android:button="@null"/>
 
     </RadioGroup>

@@ -26,10 +26,15 @@ public class SelectedPassengerAdapter extends BaseAdapter {
     private  ArrayList<Map<String,Object>> data;
     private static final String TAG = "SelectedPassengerAdapte";
 
-    public SelectedPassengerAdapter(Context context, ArrayList<Map<String,Object>> data){
-
+    public SelectedPassengerAdapter(Context context,ArrayList<Map<String,Object>> data){
         this.context = context;
         this.data = data;
+
+    }
+
+    public void setData( ArrayList<Map<String,Object>> data){
+        this.data = data;
+        notifyDataSetChanged();
     }
     @Override
     public int getCount() {
@@ -61,12 +66,10 @@ public class SelectedPassengerAdapter extends BaseAdapter {
             passengerHolder = (ViewHolder) convertView.getTag();
         }
         passengerHolder.name.setText(data.get(position).get("name").toString());
-        passengerHolder.id.setText(data.get(position).get("idCard").toString());
+        passengerHolder.id.setText(data.get(position).get("id").toString());
         passengerHolder.phone.setText(data.get(position).get("tel").toString());
         data.get(position).put("choose", passengerHolder.checkBox);
-        Log.d(TAG, "getView: "+data.get(position).get("name").toString());
-        Log.d(TAG, "getView: "+data.get(position).get("idCard").toString());
-        Log.d(TAG, "getView: "+data.get(position).get("tel").toString());
+
         return convertView;
     }
 

@@ -27,6 +27,7 @@
         android:layout_height="0dp"
         android:layout_weight="10"/>
 
+
     <Button
         android:id="@+id/btn_check"
         android:layout_width="match_parent"
@@ -34,5 +35,7 @@
         android:layout_weight="1.5"
         android:text="查看二维码"
         android:textSize="25sp"/>
+
+
 
 </LinearLayout>

@@ -5,21 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".my.MyAccount"
     android:orientation="vertical"
-    android:padding="30sp">
-
-<!--
-        <TextView
-            android:id="@+id/tv_myaccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的账户"
-            android:textSize="25sp"
-            android:layout_centerHorizontal="true" />-->
+    android:padding="10dp">
 
 
     <ListView
         android:id="@+id/lv_myaccount"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 

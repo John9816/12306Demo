@@ -20,7 +20,8 @@
                 android:layout_height="wrap_content"
                 android:text="订单"
                 android:textSize="20sp"
-                android:layout_alignParentLeft="true"/>
+                android:layout_alignParentLeft="true"
+                android:textColor="#473E3E"/>
 
             <TextView
                 android:id="@+id/payState"
@@ -28,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:text="支付"
                 android:textSize="20sp"
+                android:textColor="@color/c1"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
@@ -48,8 +50,9 @@
                     android:id="@+id/train_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="车牌号"
-                    android:textSize="25sp" />
+                    android:text="车次"
+                    android:textSize="25sp"
+                    android:textColor="#141111"/>
 
                 <TextView
                     android:id="@+id/train_data"

@@ -58,7 +58,7 @@ public class AddPassengerAdapter extends BaseAdapter {
         }
 
         viewHolder.name.setText(data.get(position).get("name").toString());
-        viewHolder.idCard.setText(data.get(position).get("idCard").toString());
+        viewHolder.idCard.setText(data.get(position).get("idType").toString()+":"+data.get(position).get("id").toString());
         viewHolder.tel.setText(data.get(position).get("tel").toString());
         Log.d(TAG, "getView: "+data.get(position).get("name").toString());
         return convertView;

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/trainNumber"
@@ -67,14 +68,23 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/gridlayout"
-        android:layout_width="0dp"
-        android:layout_weight="1.5"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
 
-        android:orientation="horizontal">
 
-    </TextView>
+        <com.example.a12306.ticket.adapter.MyGridView
+            android:id="@+id/gridview"
+            android:layout_width="0dp"
+            android:layout_weight="1.7"
+            android:horizontalSpacing="1dp"
+            android:listSelector="@android:color/white"
+            android:numColumns="2"
+            android:gravity="center_vertical"
+            android:scrollbars="none"
+            android:verticalSpacing="12dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            />
+
+
+
+
 </LinearLayout>
