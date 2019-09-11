@@ -607,6 +607,7 @@ public final class CONST {
                                             ticketNew.setStatus(status);
 
                                             //passengerList array
+
                                             List<TicketNew.PassengerListBean> passengerListBeanList = new ArrayList<>();
                                             JSONArray passengerListArray = new JSONArray(passengerList);
                                             for (int j = 0; j < passengerListArray.length(); j++) {
@@ -764,6 +765,7 @@ public final class CONST {
                                 ticketNew.setStatus(status);
 
                                 //passengerList array
+
                                passengerListBeanList = new ArrayList<>();
                                 JSONArray passengerListArray = new JSONArray(passengerList);
                                 for (int j = 0; j < passengerListArray.length(); j++) {
@@ -856,7 +858,7 @@ public final class CONST {
                             }
                             adapter.notifyDataSetChanged();
                             adapter.setData(unPayNewList);
-
+                            Log.e(TAG, "run: "+passengerListBeanList.size() );
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -874,7 +876,7 @@ public final class CONST {
 
     }
 
-// 取消订单
+    // 取消订单
     public static void CancelThread(final Context context,final String orderId){
         new Thread(){
 

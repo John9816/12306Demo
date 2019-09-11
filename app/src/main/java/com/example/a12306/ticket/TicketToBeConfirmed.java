@@ -51,9 +51,6 @@ public class TicketToBeConfirmed extends AppCompatActivity implements View.OnCli
     private Toolbar toolbar;
     private Intent intent;
 
-    //public static ArrayList<HashMap<String, Object>> unpayTicket = new ArrayList<>();
-    //public static ArrayList<HashMap<String, Object>> allPayTicket = new ArrayList<>();
-
     public static ArrayList<HashMap<String, Object>> data = new ArrayList<>();
     public static TicketToBeConfirmed ticketToBeConfirmed;
     public static ArrayList<ArrayList<HashMap<String, Object>>> content  = new ArrayList<>();
@@ -108,6 +105,7 @@ public class TicketToBeConfirmed extends AppCompatActivity implements View.OnCli
 
         TicketToBeConfirmedAdapter adapter = new TicketToBeConfirmedAdapter(this,list);
        lv_ticket_details.setAdapter(adapter);
+        Log.e(TAG, "getData: "+list.size());
         content.add(AddPassenger.dispalyselected);
     }
 
@@ -120,10 +118,6 @@ public class TicketToBeConfirmed extends AppCompatActivity implements View.OnCli
             case R.id.pause_submit:
                 intent = new Intent(TicketToBeConfirmed.this, MainActivity.class);
                 intent.putExtra("order", 1);
-                //allPayTicket = data;
-                //allPayTicket.get(0).put("statue", 0);
-                //unpayTicket.addAll(data);
-                //AllPayFragment.allPaidTicket.addAll(data);
                 TicketReservation.ticketReservation.finish();
                 TicketReservationDetail.ticketReservationDetail.finish();
                 AddPassenger.addPassenger.finish();

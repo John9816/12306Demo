@@ -38,6 +38,7 @@ public class TobePayAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
+        Log.e(TAG, "getCount: "+data.size() );
         return data.size();
     }
 

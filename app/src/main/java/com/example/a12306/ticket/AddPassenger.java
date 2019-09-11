@@ -68,6 +68,7 @@ Handler handler = new Handler(){
         switch (msg.what){
             case 1:
                 List<TicketNew.PassengerListBean> pslist = (List<TicketNew.PassengerListBean>) msg.obj;
+                list.clear();
                 for (int i = 0; i < pslist.size(); i++) {
                     HashMap<String,Object> map = new HashMap<>();
                     map.put("name",pslist.get(i).getName());
@@ -178,13 +179,6 @@ Handler handler = new Handler(){
                 break;
             case R.id.tv_Submit:
                 new Thread(SubmitOrderThread).start();
-               /* Intent intent = new Intent(AddPassenger.this, TicketToBeConfirmed.class);
-                Bundle bundle = new Bundle();
-
-                bundle.putSerializable("data", maplist);
-                Log.e(TAG, "onClick: " + maplist);
-                intent.putExtras(bundle);
-                startActivity(intent);*/
                 break;
         }
     }

@@ -40,6 +40,7 @@ public class PaidTicket extends AppCompatActivity {
     private TextView textView;
     private ImageView  imageView;
     private String OrderTime,trainNo,trainDate;
+    private static final String TAG = "PaidTicket";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
